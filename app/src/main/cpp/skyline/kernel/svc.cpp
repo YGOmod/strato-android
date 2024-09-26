@@ -20,10 +20,10 @@ namespace skyline::kernel::svc {
             LOGW("'size' not divisible by 2MB: 0x{:X}", size);
             return;
         } else if (state.process->memory.heap.size() < size) [[unlikely]] {
-            ctx.w0 = result::InvalidSize;
+            ctx.w0 = result::OutOfMemory;
             ctx.x1 = 0;
 
-            LOGW("'size' exceeded size of heap region: 0x{:X}", size);
+            LOGW("'size' exceeded size of heap region: 0x{:X} (heap region size: 0x{:X})", size, state.process->memory.heap.size());
             return;
         }
 
@@ -225,7 +225,7 @@ namespace skyline::kernel::svc {
                 .ipcRefCount = 0,
             };
 
-            fmt::format("Address: {}, Region Start: 0x{:X}, Size: 0x{:X}, Type: 0x{:X}, Attributes: 0x{:X}, Permissions: {}", fmt::ptr(address), memInfo.address, memInfo.size, memInfo.type, memInfo.attributes, chunk->second.permission);
+            LOGD("Address: {}, Region Start: 0x{:X}, Size: 0x{:X}, Type: 0x{:X}, Attributes: 0x{:X}, Permissions: {}", fmt::ptr(address), memInfo.address, memInfo.size, memInfo.type, memInfo.attributes, chunk->second.permission);
         } else {
             u64 addressSpaceEnd{reinterpret_cast<u64>(state.process->memory.addressSpace.end().base())};
 
@@ -238,7 +238,8 @@ namespace skyline::kernel::svc {
             LOGD("Trying to query memory outside of the application's address space: {}", fmt::ptr(address));
         }
 
-        *reinterpret_cast<memory::MemoryInfo *>(ctx.x0) = memInfo;
+        auto *out = state.process->memory.TranslateVirtualPointer<memory::MemoryInfo *>(ctx.x0);
+        *out = memInfo;
         // The page info, which is always 0
         ctx.w1 = 0;
 
@@ -664,7 +665,7 @@ namespace skyline::kernel::svc {
             return;
         }
 
-        span waitHandles(reinterpret_cast<KHandle *>(ctx.x1), numHandles);
+        span waitHandles(state.process->memory.TranslateVirtualPointer<KHandle *>(ctx.x1), numHandles);
         std::vector<std::shared_ptr<type::KSyncObject>> objectTable;
         objectTable.reserve(numHandles);
 
@@ -790,7 +791,7 @@ namespace skyline::kernel::svc {
     }
 
     void ArbitrateLock(const DeviceState &state, SvcContext &ctx) {
-        auto mutex{reinterpret_cast<u32 *>(ctx.x1)};
+        auto mutex{state.process->memory.TranslateVirtualPointer<u32 *>(ctx.x1)};
         if (!util::IsWordAligned(mutex)) {
             LOGW("'mutex' not word aligned: {}", fmt::ptr(mutex));
             ctx.w0 = result::InvalidAddress;
@@ -813,7 +814,7 @@ namespace skyline::kernel::svc {
     }
 
     void ArbitrateUnlock(const DeviceState &state, SvcContext &ctx) {
-        auto mutex{reinterpret_cast<u32 *>(ctx.x0)};
+        auto mutex{state.process->memory.TranslateVirtualPointer<u32 *>(ctx.x0)};
         if (!util::IsWordAligned(mutex)) {
             LOGW("'mutex' not word aligned: {}", fmt::ptr(mutex));
             ctx.w0 = result::InvalidAddress;
@@ -828,14 +829,14 @@ namespace skyline::kernel::svc {
     }
 
     void WaitProcessWideKeyAtomic(const DeviceState &state, SvcContext &ctx) {
-        auto mutex{reinterpret_cast<u32 *>(ctx.x0)};
+        auto mutex{state.process->memory.TranslateVirtualPointer<u32 *>(ctx.x0)};
         if (!util::IsWordAligned(mutex)) {
             LOGW("'mutex' not word aligned: {}", fmt::ptr(mutex));
             ctx.w0 = result::InvalidAddress;
             return;
         }
 
-        auto conditional{reinterpret_cast<u32 *>(ctx.x1)};
+        auto conditional{state.process->memory.TranslateVirtualPointer<u32 *>(ctx.x1)};
         KHandle requesterHandle{ctx.w2};
 
         i64 timeout{static_cast<i64>(ctx.x3)};
@@ -850,7 +851,7 @@ namespace skyline::kernel::svc {
     }
 
     void SignalProcessWideKey(const DeviceState &state, SvcContext &ctx) {
-        auto conditional{reinterpret_cast<u32 *>(ctx.x0)};
+        auto conditional{state.process->memory.TranslateVirtualPointer<u32 *>(ctx.x0)};
         i32 count{static_cast<i32>(ctx.w1)};
 
         LOGD("Signalling {} for {} waiters", fmt::ptr(conditional), count);
@@ -873,7 +874,7 @@ namespace skyline::kernel::svc {
 
     void ConnectToNamedPort(const DeviceState &state, SvcContext &ctx) {
         constexpr u8 portSize = 0x8; //!< The size of a port name string
-        std::string_view port(span(reinterpret_cast<char *>(ctx.x1), portSize).as_string(true));
+        std::string_view port(span(state.process->memory.TranslateVirtualPointer<char *>(ctx.x1), portSize).as_string(true));
 
         KHandle handle{};
         if (port.compare("sm:") >= 0) {
@@ -919,7 +920,7 @@ namespace skyline::kernel::svc {
     }
 
     void OutputDebugString(const DeviceState &state, SvcContext &ctx) {
-        auto string{span(reinterpret_cast<char *>(ctx.x0), ctx.x1).as_string()};
+        auto string{span(state.process->memory.TranslateVirtualPointer<char *>(ctx.x0), ctx.x1).as_string()};
 
         if (string.back() == '\n')
             string.remove_suffix(1);
@@ -1051,7 +1052,7 @@ namespace skyline::kernel::svc {
                 break;
 
             case InfoState::UserExceptionContextAddr:
-                out = reinterpret_cast<u64>(state.process->tlsExceptionContext);
+                out = state.process->memory.TranslateHostAddress(state.process->tlsExceptionContext);
                 break;
 
             default:
@@ -1215,20 +1216,44 @@ namespace skyline::kernel::svc {
             };
             static_assert(sizeof(ThreadContext) == 0x320);
 
-            auto &context{*reinterpret_cast<ThreadContext *>(ctx.x0)};
+            auto &context{*state.process->memory.TranslateVirtualPointer<ThreadContext *>(ctx.x0)};
             context = {}; // Zero-initialize the contents of the context as not all fields are set
 
-            auto &targetContext{thread->ctx};
-            for (size_t i{}; i < targetContext.gpr.regs.size(); i++)
-                context.gpr[i] = targetContext.gpr.regs[i];
+            if (state.process->is64bit()) {
+                auto &targetContext{dynamic_cast<type::KNceThread *>(thread.get())->ctx};
+                for (size_t i{}; i < targetContext.gpr.regs.size(); i++)
+                    context.gpr[i] = targetContext.gpr.regs[i];
 
-            for (size_t i{}; i < targetContext.fpr.regs.size(); i++)
-                context.vreg[i] = targetContext.fpr.regs[i];
+                for (size_t i{}; i < targetContext.fpr.regs.size(); i++)
+                    context.vreg[i] = targetContext.fpr.regs[i];
 
-            context.fpcr = targetContext.fpr.fpcr;
-            context.fpsr = targetContext.fpr.fpsr;
+                context.fpcr = targetContext.fpr.fpcr;
+                context.fpsr = targetContext.fpr.fpsr;
 
-            context.tpidr = reinterpret_cast<u64>(targetContext.tpidrEl0);
+                context.tpidr = reinterpret_cast<u64>(targetContext.tpidrEl0);
+            } else { // 32 bit
+                constexpr u32 El0Aarch32PsrMask = 0xFE0FFE20;
+                // https://developer.arm.com/documentation/ddi0601/2023-12/AArch32-Registers/FPSCR--Floating-Point-Status-and-Control-Register
+                constexpr u32 FpsrMask = 0xF800009F; // [31:27], [7], [4:0]
+                constexpr u32 FpcrMask = 0x07FF9F00; // [26:15], [12:8]
+
+                auto &targetContext{dynamic_cast<type::KJit32Thread *>(thread.get())->ctx};
+
+                context.pc = targetContext.pc;
+                context.pstate = targetContext.cpsr & El0Aarch32PsrMask;
+
+                for (size_t i{}; i < targetContext.gpr.size() - 1; i++)
+                    context.gpr[i] = targetContext.gpr[i];
+
+                // TODO: Check if this is correct
+                for (size_t i{}; i < targetContext.fpr.size(); i++) {
+                    context.vreg[i] = targetContext.fpr_d[i];
+                }
+
+                context.fpsr = targetContext.fpscr & FpsrMask;
+                context.fpcr = targetContext.fpscr & FpcrMask;
+                context.tpidr = targetContext.tpidr;
+            }
 
             // Note: We don't write the whole context as we only store the parts required according to the ARMv8 ABI for syscall handling
             LOGD("Written partial context for thread #{}", thread->id);
@@ -1241,7 +1266,7 @@ namespace skyline::kernel::svc {
     }
 
     void WaitForAddress(const DeviceState &state, SvcContext &ctx) {
-        auto address{reinterpret_cast<u32 *>(ctx.x0)};
+        auto address{state.process->memory.TranslateVirtualPointer<u32 *>(ctx.x0)};
         if (!util::IsWordAligned(address)) [[unlikely]] {
             LOGW("'address' not word aligned: {}", fmt::ptr(address));
             ctx.w0 = result::InvalidAddress;
@@ -1289,7 +1314,7 @@ namespace skyline::kernel::svc {
     }
 
     void SignalToAddress(const DeviceState &state, SvcContext &ctx) {
-        auto address{reinterpret_cast<u32 *>(ctx.x0)};
+        auto address{state.process->memory.TranslateVirtualPointer<u32 *>(ctx.x0)};
         if (!util::IsWordAligned(address)) [[unlikely]] {
             LOGW("'address' not word aligned: {}", fmt::ptr(address));
             ctx.w0 = result::InvalidAddress;

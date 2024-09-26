@@ -86,6 +86,9 @@ namespace skyline::kernel::type {
         if (!isAllocated)
             throw exception("Failed to find free memory for a tls slot!");
 
+        // Translate the page address to the host address space so that it can be accessed directly
+        pageCandidate = memory.TranslateVirtualPointer<u8 *>(reinterpret_cast<u64>(pageCandidate));
+
         auto tlsPage{std::make_shared<TlsPage>(pageCandidate)};
         tlsPages.push_back(tlsPage);
         return tlsPage->ReserveSlot();
@@ -120,7 +123,13 @@ namespace skyline::kernel::type {
             mainThreadStack = span<u8>(pageCandidate, state.process->npdm.meta.mainThreadStackSize);
         }
         size_t tid{threads.size() + 1}; //!< The first thread is HOS-1 rather than HOS-0, this is to match the HOS kernel's behaviour
-        auto thread{NewHandle<KThread>(this, tid, entry, argument, stackTop, priority ? *priority : state.process->npdm.meta.mainThreadPriority, idealCore ? *idealCore : state.process->npdm.meta.idealCore).item};
+
+        auto thread{[&]() -> std::shared_ptr<KThread> {
+            if (is64bit())
+                return NewHandle<KNceThread>(std::ref(*this), tid, entry, argument, stackTop, priority ? *priority : state.process->npdm.meta.mainThreadPriority, idealCore ? *idealCore : state.process->npdm.meta.idealCore).item;
+            else
+                return NewHandle<KJit32Thread>(std::ref(*this), tid, entry, argument, stackTop, priority ? *priority : state.process->npdm.meta.mainThreadPriority, idealCore ? *idealCore : state.process->npdm.meta.idealCore).item;
+        }()};
         threads.push_back(thread);
         return thread;
     }
