@@ -19,20 +19,20 @@ namespace skyline::vfs {
 
         std::array<u8, 0x40> issuer;
         std::array<u8, 0x100> titleKeyBlock;
-        u8  _pad0_[0x1];
+        u8 _pad0_[0x1];
         TitleKeyType titleKeyType;
-        u8  _pad1_[0x3];
-        u8  masterKeyRevision;
-        u8  _pad2_[0xA];
+        u8 _pad1_[0x3];
+        u8 masterKeyRevision;
+        u8 _pad2_[0xA];
         u64 ticketId;
         u64 deviceId;
         crypto::KeyStore::Key128 rightsId;
         u32 accountId;
-        u8  _pad3_[0x14C];
+        u8 _pad3_[0xC];
 
         Ticket() = default;
 
         Ticket(const std::shared_ptr<vfs::Backing> &backing);
     };
-    static_assert(sizeof(Ticket) == 0x2C0);
+    static_assert(sizeof(Ticket) == 0x180);
 }

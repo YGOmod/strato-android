@@ -65,8 +65,6 @@ namespace skyline {
         ~DeviceState();
 
         kernel::OS *os;
-        std::vector<std::shared_ptr<loader::Loader>> dlcLoaders;
-        std::shared_ptr<loader::Loader> updateLoader;
         std::shared_ptr<JvmManager> jvm;
         std::shared_ptr<Settings> settings;
         std::shared_ptr<loader::Loader> loader;
