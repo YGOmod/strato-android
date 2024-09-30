@@ -15,7 +15,7 @@ namespace skyline {
 
                 struct {
                     u16 timeHigh : 12;
-                    u8 version : 4;
+                    u8  version  : 4;
                 };
             };
 

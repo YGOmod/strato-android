@@ -30,7 +30,8 @@ namespace skyline::loader {
             HistoryErase = 1,
             RepairTool = 2,
             DifferentRegionCupToTerraDevice = 3,
-            DifferentRegionCupToGlobalDevice = 4
+            DifferentRegionCupToGlobalDevice = 4,
+            HasNewCardHeader = 7
         };
 
         /**
@@ -45,7 +46,9 @@ namespace skyline::loader {
             Development = 0x00,
             Retail = 0x01,
             Retail400 = 0x02, //!< [4.0.0+] Retail
+            Development1100 = 0x03, //!< [11.0.0+] Development
             Retail1100 = 0x04 //!< [11.0.0+] Retail
+            Retail1200 = 0x05 //!< [12.0.0+] Retail
         };
 
         /**
@@ -82,13 +85,13 @@ namespace skyline::loader {
         static_assert(sizeof(GamecardInfo) == 0x70);
 
         struct GamecardHeader {
-            u8 signature[0x100]; //!< RSA-2048 PKCS #1 signature over the header
+            u8  signature[0x100]; //!< RSA-2048 PKCS #1 signature over the header
             u32 magic; //!< The magic of the gamecard format: 'HEAD'
             u32 secureAreaStartAddress; //!< Secure Area Start Address in media units
             u32 backupAreaStartAddress; //!< Backup Area Start Address, always 0xFFFFFFFF
-            u8 titleKeyDecKekIndex; //!< TitleKeyDec Index (high nibble) and KEK Index (low nibble)
+            u8  titleKeyDecKekIndex; //!< TitleKeyDec Index (high nibble) and KEK Index (low nibble)
             GamecardSize size;
-            u8 version; //!< Gamecard header version
+            u8  version; //!< Gamecard header version
             GamecardFlags flags; //!< GameCardAttribute
             u64 packageId; //!< The package ID, used for challenge–response authentication
             u64 validDataEndAddress; //!< Valid Data End Address in media units
@@ -110,6 +113,7 @@ namespace skyline::loader {
         std::shared_ptr<vfs::PartitionFileSystem> update; //!< A shared pointer to the update HFS0 partition
         std::shared_ptr<vfs::PartitionFileSystem> normal; //!< A shared pointer to the normal HFS0 partition
         std::shared_ptr<vfs::PartitionFileSystem> logo; //!< A shared pointer to the logo HFS0 partition
+        std::optional<vfs::NCA> metaNca; //!< The main meta NCA within the secure partition
         std::shared_ptr<vfs::RomFileSystem> controlRomFs; //!< A shared pointer to the control NCA's RomFS
         std::optional<vfs::NCA> programNca; //!< The main program NCA within the secure partition
         std::optional<vfs::NCA> controlNca; //!< The main control NCA within the secure partition

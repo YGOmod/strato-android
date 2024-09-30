@@ -59,10 +59,10 @@ namespace skyline {
          * @url https://switchbrew.org/wiki/IPC_Marshalling#Handle_descriptor
          */
         struct HandleDescriptor {
-            bool sendPid : 1;
-            u32 copyCount : 4;
-            u32 moveCount : 4;
-            u32           : 23;
+            bool sendPid   : 1;
+            u32  copyCount : 4;
+            u32  moveCount : 4;
+            u32            : 23;
         };
         static_assert(sizeof(HandleDescriptor) == 4);
 
@@ -79,7 +79,7 @@ namespace skyline {
          */
         struct DomainHeaderRequest {
             DomainCommand command;
-            u8 inputCount;
+            u8  inputCount;
             u16 payloadSz;
             u32 objectId;
             u32 : 32;

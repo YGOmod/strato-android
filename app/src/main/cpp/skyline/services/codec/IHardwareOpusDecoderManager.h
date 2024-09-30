@@ -50,12 +50,19 @@ namespace skyline::service::codec {
          * @url https://switchbrew.org/wiki/Audio_services#GetWorkBufferSizeEx
          */
         Result GetWorkBufferSizeEx(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
+        
+        /**
+         * @brief Returns the required size for the decoder's work buffer [16.0.0+]
+         * @url https://switchbrew.org/wiki/Audio_services#GetWorkBufferSizeExEx
+         */
+        Result GetWorkBufferSizeExEx(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
 
         SERVICE_DECL(
             SFUNC(0x0, IHardwareOpusDecoderManager, OpenHardwareOpusDecoder),
             SFUNC(0x1, IHardwareOpusDecoderManager, GetWorkBufferSize),
             SFUNC(0x4, IHardwareOpusDecoderManager, OpenHardwareOpusDecoderEx),
             SFUNC(0x5, IHardwareOpusDecoderManager, GetWorkBufferSizeEx),
+            SFUNC(0x8, IHardwareOpusDecoderManager, GetWorkBufferSizeExEx),
         )
     };
 }

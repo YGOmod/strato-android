@@ -13,6 +13,10 @@ namespace skyline::service::aocsrv {
         return {};
     }
 
+    Result IPurchaseEventManager::SetDeliveryTarget(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response) {
+        return {};
+    }
+
     Result IPurchaseEventManager::GetPurchasedEventReadableHandle(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response) {
         auto handle{state.process->InsertItem(purchasedEvent)};
         LOGD("Purchased Event Readable Handle: 0x{:X}", handle);

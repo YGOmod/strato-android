@@ -56,4 +56,14 @@ namespace skyline::service::codec {
         response.Push<u32>(CalculateBufferSize(sampleRate, channelCount, useLargerFrameSize));
         return {};
     }
+
+    Result IHardwareOpusDecoderManager::GetWorkBufferSizeExEx(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response) {
+        i32 sampleRate{request.Pop<i32>()};
+        i32 channelCount{request.Pop<i32>()};
+        i32 useLargerFrameSize{request.Pop<i32>()};
+        request.Pop<i32>(); // Just padding
+
+        response.Push<u32>(CalculateBufferSize(sampleRate, channelCount, useLargerFrameSize));
+        return {};
+    }
 }
