@@ -41,12 +41,12 @@ namespace skyline::service::nvdrv::device::nvhost {
          */
         union SubmitGpfifoFlags {
             struct __attribute__((__packed__)) {
-                bool fenceWait : 1;
-                bool fenceIncrement : 1;
-                bool hwFormat : 1;
-                u8 _pad0_ : 1;
-                bool suppressWfi : 1;
-                u8 _pad1_ : 3;
+                bool fenceWait          : 1;
+                bool fenceIncrement     : 1;
+                bool hwFormat           : 1;
+                u8   _pad0_             : 1;
+                bool suppressWfi        : 1;
+                u8   _pad1_             : 3;
                 bool incrementWithValue : 1;
             };
             u32 raw;

@@ -20,15 +20,15 @@ namespace skyline::service::nvdrv::device::nvhost {
             u32 val;
 
             struct {
-                u8 partialSlot : 4;
+                u8  partialSlot : 4;
                 u32 syncpointId : 28;
             };
 
             struct {
-                u16 slot;
-                u16 syncpointIdForAllocation : 12;
+                u16  slot;
+                u16  syncpointIdForAllocation : 12;
                 bool eventAllocated : 1;
-                u8 _pad12_ : 3;
+                u8  _pad12_ : 3;
             };
         };
         static_assert(sizeof(SyncpointEventValue) == sizeof(u32));

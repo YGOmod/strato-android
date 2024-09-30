@@ -2,9 +2,12 @@
 name: PR Build
 
 on:
-  pull_request:
-    types: [ opened, synchronize, reopened ]
-    branches: [ master ]
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'select branch to build(default: master)'
+        required: false
+        default: 'master'
 
 # Only allow the latest build to run for a given PR, and cancel any previous builds
 concurrency:

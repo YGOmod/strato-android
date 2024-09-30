@@ -17,11 +17,11 @@ namespace skyline::loader {
         union NsoFlags {
             struct {
                 bool textCompressed : 1; //!< .text is compressed
-                bool roCompressed : 1; //!< .rodata is compressed
+                bool roCompressed   : 1; //!< .rodata is compressed
                 bool dataCompressed : 1; //!< .data is compressed
-                bool textHash : 1; //!< .text hash should be checked before loading
-                bool roHash : 1; //!< .rodata hash should be checked before loading
-                bool dataHash : 1; //!< .data hash should be checked before loading
+                bool textHash       : 1; //!< .text hash should be checked before loading
+                bool roHash         : 1; //!< .rodata hash should be checked before loading
+                bool dataHash       : 1; //!< .data hash should be checked before loading
             };
             u32 raw;
         };

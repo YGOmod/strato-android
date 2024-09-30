@@ -139,7 +139,7 @@ namespace skyline::service::nvdrv {
             u32 allocatableSize;
             u32 minimumFreeSize;
             u32 minimumAllocatableSize;
-            u32 reserved;
+            u8  _pad0_[0x10];
         };
 
         // Return empty values since we don't use the transfer memory for allocations

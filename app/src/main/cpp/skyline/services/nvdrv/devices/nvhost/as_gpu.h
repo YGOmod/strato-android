@@ -33,9 +33,9 @@ namespace skyline::service::nvdrv::device::nvhost {
         };
 
         struct Allocation {
-            u64 size;
+            u64  size;
             std::list<std::shared_ptr<Mapping>> mappings;
-            u32 pageSize;
+            u32  pageSize;
             bool sparse;
         };
 
@@ -75,11 +75,11 @@ namespace skyline::service::nvdrv::device::nvhost {
 
       public:
         struct MappingFlags {
-            bool fixed : 1;
+            bool fixed  : 1;
             bool sparse : 1;
-            u8 _pad0_ : 6;
-            bool remap : 1;
-            u32 _pad1_ : 23;
+            u8   _pad0_ : 6;
+            bool remap  : 1;
+            u32  _pad1_ : 23;
         };
         static_assert(sizeof(MappingFlags) == sizeof(u32));
 
