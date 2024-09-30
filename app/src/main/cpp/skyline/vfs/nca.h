@@ -56,7 +56,7 @@ namespace skyline {
             Invalid = 0xFF, //!< An invalid key generation type
         };
 
-        enum class NcaKeyAreaEncryptionKeyType : u8 {
+        enum class NCAKeyAreaEncryptionKeyType : u8 {
             Application = 0x0, //!< This NCA uses the application key encryption area
             Ocean = 0x1, //!< This NCA uses the ocean key encryption area
             System = 0x2, //!< This NCA uses the system key encryption area
