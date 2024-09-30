@@ -47,7 +47,7 @@ namespace skyline::loader {
             Retail = 0x01,
             Retail400 = 0x02, //!< [4.0.0+] Retail
             Development1100 = 0x03, //!< [11.0.0+] Development
-            Retail1100 = 0x04 //!< [11.0.0+] Retail
+            Retail1100 = 0x04, //!< [11.0.0+] Retail
             Retail1200 = 0x05 //!< [12.0.0+] Retail
         };
 
@@ -77,10 +77,10 @@ namespace skyline::loader {
             u32 firmwareMode;
             u32 cupVersion;
             CompatType compatType;
-            u8 _pad0_[0x3];
+            u8  _pad0_[0x3];
             u64 updatePartitionHash;
             u64 cupId; //!< CUP ID, always 0x0100000000000816, which is the title-listing data archive's title ID
-            u8 _pad1_[0x38];
+            u8  _pad1_[0x38];
         };
         static_assert(sizeof(GamecardInfo) == 0x70);
 
