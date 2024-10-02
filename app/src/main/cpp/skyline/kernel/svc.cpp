@@ -1362,7 +1362,7 @@ namespace skyline::kernel::svc {
     #define SVC_STRINGIFY(name) #name
     #define SVC_ENTRY(function) SvcDescriptor{function, SVC_STRINGIFY(Svc ## function)} //!< A macro which automatically stringifies the function name as the name to prevent pointless duplication
 
-    constexpr std::array<SvcDescriptor, 0x80> SvcTable{
+    constexpr std::array<SvcDescriptor, 0x82> SvcTable{
         SVC_NONE, // 0x00 (Does not exist)
         SVC_ENTRY(SetHeapSize), // 0x01
         SVC_ENTRY(SetMemoryPermission), // 0x02

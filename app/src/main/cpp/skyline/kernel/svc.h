@@ -269,5 +269,5 @@ namespace skyline::kernel::svc {
     /**
      * @brief The SVC table that maps all SVCs to their corresponding functions
      */
-    extern const std::array<SvcDescriptor, 0x80> SvcTable;
+    extern const std::array<SvcDescriptor, 0x82> SvcTable;
 }
