@@ -1490,7 +1490,9 @@ namespace skyline::kernel::svc {
         SVC_NONE, // 0x7C
         SVC_NONE, // 0x7D
         SVC_NONE, // 0x7E
-        SVC_NONE // 0x7F
+        SVC_NONE, // 0x7F
+        SVC_NONE, // 0x90
+        SVC_NONE // 0x91
     };
 
     #undef SVC_NONE

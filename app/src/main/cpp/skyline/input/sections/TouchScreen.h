@@ -14,7 +14,7 @@ namespace skyline::input {
         u32 raw{};
         struct {
             bool start : 1;
-            bool end : 1;
+            bool end   : 1;
         };
     };
     static_assert(sizeof(TouchAttribute) == 0x4);

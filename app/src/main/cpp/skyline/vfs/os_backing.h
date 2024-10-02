@@ -11,7 +11,7 @@ namespace skyline::vfs {
      */
     class OsBacking : public Backing {
       private:
-        int fd; //!< An FD to the backing
+        int  fd; //!< An FD to the backing
         bool closable; //!< Whether the FD can be closed when the backing is destroyed
 
       protected:

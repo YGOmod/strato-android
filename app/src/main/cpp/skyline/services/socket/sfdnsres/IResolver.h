@@ -8,12 +8,12 @@
 
 namespace skyline::service::socket {
     enum class NetDbError : i32 {
-        Internal = -1,
-        Success = 0,
+        Internal     = -1,
+        Success      = 0,
         HostNotFound = 1,
-        TryAgain = 2,
-        NoRecovery = 3,
-        NoData = 4,
+        TryAgain     = 2,
+        NoRecovery   = 3,
+        NoData       = 4,
     };
 
     /**

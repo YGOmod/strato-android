@@ -35,16 +35,16 @@ namespace skyline::input {
      * @brief How many joycons must be attached for handheld mode to be triggered
      */
     enum class NpadHandheldActivationMode : u64 {
-        Dual = 0,
+        Dual   = 0,
         Single = 1,
-        None = 2,
+        None   = 2,
     };
 
     /**
      * @brief The orientations the Joy-Con(s) can be held in
      */
     enum class NpadJoyOrientation : i64 {
-        Vertical = 0,
+        Vertical   = 0,
         Horizontal = 1,
     };
 
@@ -54,16 +54,22 @@ namespace skyline::input {
     union NpadStyleSet {
         u32 raw;
         struct {
-            bool proController : 1; //!< Pro Controller
+            bool proController  : 1; //!< Pro Controller
             bool joyconHandheld : 1; //!< Joy-Cons in handheld mode
-            bool joyconDual : 1; //!< Joy-Cons in a pair
-            bool joyconLeft : 1; //!< Left Joy-Con only
-            bool joyconRight : 1; //!< Right Joy-Con only
-            bool gamecube : 1; //!< GameCube controller
-            bool palma : 1; //!< Poké Ball Plus controller
-            bool nes : 1; //!< NES controller
-            bool nesHandheld : 1; //!< NES controller in handheld mode
-            bool snes : 1; //!< SNES controller
+            bool joyconDual     : 1; //!< Joy-Cons in a pair
+            bool joyconLeft     : 1; //!< Left Joy-Con only
+            bool joyconRight    : 1; //!< Right Joy-Con only
+            bool gamecube       : 1; //!< GameCube controller
+            bool palma          : 1; //!< Poké Ball Plus controller
+            bool nes            : 1; //!< NES controller
+            bool nesHandheld    : 1; //!< NES controller in handheld mode
+            bool snes           : 1; //!< SNES controller
+            bool n64            : 1; //!< N64 controller
+            bool genesis        : 1; //!< Sega Genesis controller
+            bool reserved       : 17;
+            bool systemExt      : 1; //!< generic external controller
+            bool system         : 1; //!< generic controller
+            bool reserved1      : 1;
         };
     };
     static_assert(sizeof(NpadStyleSet) == 0x4);
@@ -155,9 +161,9 @@ namespace skyline::input {
      * @url https://switchbrew.org/wiki/HID_services#GyroscopeZeroDriftMode
      */
     enum class GyroscopeZeroDriftMode : u32 {
-        Loose = 0,
+        Loose    = 0,
         Standard = 1,
-        Tight = 2,
+        Tight    = 2,
     };
 
     class NpadManager;

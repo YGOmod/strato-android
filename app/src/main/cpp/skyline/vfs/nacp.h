@@ -26,16 +26,16 @@ namespace skyline::vfs {
         struct NacpData {
             std::array<ApplicationTitle, 0x10> titleEntries; //!< Title entries for each language
             std::array<u8, 0x25> isbn;
-            u8 startupUserAccount;
-            u8 userAccountSwitchLock;
-            u8 addonContentRegistrationType;
+            u8  startupUserAccount;
+            u8  userAccountSwitchLock;
+            u8  addonContentRegistrationType;
             u32 attributeFlag;
             u32 supportedLanguageFlag; //!< A bitmask containing the game's supported languages
             u32 parentalControlFlag;
-            u8 screenshotEnabled;
-            u8 videoCaptureMode;
-            u8 dataLossConfirmation;
-            u8 _pad0_[0x1];
+            u8  screenshotEnabled;
+            u8  videoCaptureMode;
+            u8  dataLossConfirmation;
+            u8  _pad0_[0x1];
             u64 presenceGroupId;
             std::array<u8, 0x20> ratingAge;
             std::array<char, 0x10> displayVersion; //!< The user-readable version of the application
@@ -48,14 +48,16 @@ namespace skyline::vfs {
             u64 bcatDeliveryCacheStorageSize;
             char applicationErrorCodeCategory[8];
             std::array<u64, 0x8> localCommunicationId;
-            u8 logoType;
-            u8 logoHandling;
-            u8 runtimeAddOnContentInstall;
-            u8 runtimeParameterDelivery;
-            u8 appropriateAgeForChina;
-            u8 _pad1_[0x3];
+            u8  logoType;
+            u8  logoHandling;
+            u8  runtimeAddOnContentInstall;
+            u8  runtimeParameterDelivery;
+            u8  appropriateAgeForChina;
+            u8  _pad1_[0x1];
+            u8  crashReport;
+            u8  hdcp;
             std::array<u8, 8> seedForPseudoDeviceId; //!< Seed that is combined with the device seed for generating the pseudo-device ID
-            u8 _pad2_[0xF00];
+            u8  _pad2_[0xF00];
         } nacpContents{};
         static_assert(sizeof(NacpData) == 0x4000);
 

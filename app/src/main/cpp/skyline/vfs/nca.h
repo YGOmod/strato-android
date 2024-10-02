@@ -14,11 +14,11 @@ namespace skyline {
 
     namespace vfs {
         enum class NcaContentType : u8 {
-            Program = 0x0,    //!< Program NCA
-            Meta = 0x1,       //!< Metadata NCA
-            Control = 0x2,    //!< Control NCA
-            Manual = 0x3,     //!< Manual NCA
-            Data = 0x4,       //!< Data NCA
+            Program    = 0x0, //!< Program NCA
+            Meta       = 0x1, //!< Metadata NCA
+            Control    = 0x2, //!< Control NCA
+            Manual     = 0x3, //!< Manual NCA
+            Data       = 0x4, //!< Data NCA
             PublicData = 0x5, //!< Public data NCA
         };
 
@@ -29,7 +29,7 @@ namespace skyline {
         class NCA {
           private:
             enum class NcaDistributionType : u8 {
-                System = 0x0, //!< This NCA was distributed on the EShop or is part of the system
+                System   = 0x0, //!< This NCA was distributed on the EShop or is part of the system
                 GameCard = 0x1, //!< This NCA was distributed on a GameCard
             };
 
@@ -37,8 +37,9 @@ namespace skyline {
              * @brief The key generation version in NCAs before HOS 3.0.1
              */
             enum class NcaLegacyKeyGenerationType : u8 {
-                Fw100 = 0x0, //!< 1.0.0
-                Fw300 = 0x2, //!< 3.0.0
+                Fw100  = 0x0, //!< 1.0.0
+                Unused = 0x1,
+                Fw300  = 0x2, //!< 3.0.0
             };
 
             /**
@@ -54,6 +55,13 @@ namespace skyline {
                 Fw810 = 0x9, //!< 8.1.0
                 Fw900 = 0xA, //!< 9.0.0
                 Fw910 = 0xB, //!< 9.1.0
+                Fw1210 = 0xC, //!< 12.1.0
+                Fw1300 = 0xD, //!< 13.0.0
+                Fw1400 = 0xE, //!< 14.0.0
+                Fw1500 = 0xF, //!< 15.0.0
+                Fw1600 = 0x10, //!< 16.0.0
+                Fw1700 = 0x11, //!< 17.0.0
+                Fw1800 = 0x12, //!< 18.0.0
                 Invalid = 0xFF, //!< An invalid key generation type
             };
 
@@ -75,15 +83,23 @@ namespace skyline {
             };
 
             enum class NcaSectionHashType : u8 {
+                Auto = 0x0,
+                None = 0x1,
                 HierarchicalSha256 = 0x2, //!< The hash header for this section is that of a PFS0
                 HierarchicalIntegrity = 0x3, //!< The hash header for this section is that of a RomFS
+                AutoSha3 = 0x4,
+                HierarchicalSha3256Hash = 0x5,
+                HierarchicalIntegritySha3Hash = 0x6,
             };
 
             enum class NcaSectionEncryptionType : u8 {
+                Auto = 0x0,
                 None = 0x1, //!< This NCA doesn't use any encryption
                 XTS = 0x2, //!< This NCA uses AES-XTS encryption
                 CTR = 0x3, //!< This NCA uses AES-CTR encryption
                 BKTR = 0x4, //!< This NCA uses BKTR together AES-CTR encryption
+                CtrSkipLayerHash = 0x5,
+                CtrExSkipLayerHash = 0x6,
             };
 
             /**

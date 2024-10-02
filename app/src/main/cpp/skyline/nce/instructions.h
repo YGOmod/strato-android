@@ -28,9 +28,9 @@ namespace skyline::nce {
 
             union {
                 struct {
-                    u8 sig0 : 5;  //!< 5-bit signature (0x0)
+                    u8  sig0  : 5;  //!< 5-bit signature (0x0)
                     u32 value : 16; //!< 16-bit immediate value
-                    u16 sig1 : 11; //!< 11-bit signature (0x6A1)
+                    u16 sig1  : 11; //!< 11-bit signature (0x6A1)
                 };
                 u32 raw{};
             };
@@ -47,9 +47,9 @@ namespace skyline::nce {
 
             union {
                 struct {
-                    u8 sig0 : 5;  //!< 5-bit signature (0x0)
+                    u8  sig0  : 5;  //!< 5-bit signature (0x0)
                     u32 value : 16; //!< 16-bit immediate value
-                    u16 sig1 : 11; //!< 11-bit signature (0x6A1)
+                    u16 sig1  : 11; //!< 11-bit signature (0x6A1)
                 };
                 u32 raw{};
             };
@@ -68,9 +68,9 @@ namespace skyline::nce {
 
             union {
                 struct {
-                    u8 destReg : 5; //!< 5-bit destination register
-                    u32 srcReg : 15; //!< 15-bit source register
-                    u16 sig : 12; //!< 16-bit signature (0xD53)
+                    u8  destReg : 5; //!< 5-bit destination register
+                    u32 srcReg  : 15; //!< 15-bit source register
+                    u16 sig     : 12; //!< 16-bit signature (0xD53)
                 };
                 u32 raw{};
             };

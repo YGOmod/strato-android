@@ -71,10 +71,10 @@ namespace skyline {
             constexpr explicit MemoryAttribute(u8 value) : value{value} {}
 
             struct {
-                bool isBorrowed : 1; //!< This is required for async IPC user buffers
-                bool isIpcLocked : 1; //!< True when IpcRefCount > 0
+                bool isBorrowed     : 1; //!< This is required for async IPC user buffers
+                bool isIpcLocked    : 1; //!< True when IpcRefCount > 0
                 bool isDeviceShared : 1; //!< True when DeviceRefCount > 0
-                bool isUncached : 1; //!< This is used to disable memory caching to share memory with the GPU
+                bool isUncached     : 1; //!< This is used to disable memory caching to share memory with the GPU
             };
             u8 value;
         };

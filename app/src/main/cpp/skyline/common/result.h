@@ -14,7 +14,7 @@ namespace skyline {
         u32 raw{};
         struct __attribute__((packed)) {
             u16 module : 9;
-            u16 id : 12;
+            u16 id     : 12;
         };
 
         /**

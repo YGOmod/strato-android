@@ -25,8 +25,8 @@ namespace skyline::vfs {
       public:
         union Mode {
             struct {
-                bool read : 1; //!< The backing is readable
-                bool write : 1; //!< The backing is writable
+                bool read   : 1; //!< The backing is readable
+                bool write  : 1; //!< The backing is writable
                 bool append : 1; //!< The backing can be appended
             };
             u32 raw;

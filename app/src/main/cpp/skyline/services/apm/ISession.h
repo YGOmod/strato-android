@@ -30,7 +30,7 @@ namespace skyline::service::apm {
 
         SERVICE_DECL(
             SFUNC(0x0, ISession, SetPerformanceConfiguration),
-            SFUNC(0x1, ISession, GetPerformanceConfiguration)
+            SFUNC(0x1, ISession, GetPerformanceConfiguration),
         )
     };
 }

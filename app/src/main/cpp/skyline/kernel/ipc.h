@@ -9,7 +9,7 @@
 
 namespace skyline {
     namespace constant {
-        constexpr u8 IpcPaddingSum{0x10}; // The sum of the padding surrounding the data payload
+        constexpr u8  IpcPaddingSum{0x10}; // The sum of the padding surrounding the data payload
         constexpr u16 TlsIpcSize{0x100}; // The size of the IPC command buffer in a TLS slot
     }
 
@@ -43,20 +43,20 @@ namespace skyline {
          * @url https://switchbrew.org/wiki/IPC_Marshalling#IPC_Command_Structure
          */
         struct CommandHeader {
-            CommandType type : 16;
-            u8 xNo : 4;
-            u8 aNo : 4;
-            u8 bNo : 4;
-            u8 wNo : 4;
-            u32 rawSize : 10;
+            CommandType type  : 16;
+            u8  xNo           : 4;
+            u8  aNo           : 4;
+            u8  bNo           : 4;
+            u8  wNo           : 4;
+            u32 rawSize       : 10;
             BufferCFlag cFlag : 4;
             u32               : 17;
-            bool handleDesc : 1;
+            bool handleDesc   : 1;
         };
         static_assert(sizeof(CommandHeader) == 8);
 
         /**
-         * @url https://switchbrew.org/wiki/IPC_Marshalling#Handle_descriptor
+         * @url https://switchbrew.org/wiki/HIPC#SpecialTag
          */
         struct HandleDescriptor {
             bool sendPid   : 1;
@@ -70,7 +70,7 @@ namespace skyline {
          * @brief Commands which can be issued via a domain request
          */
         enum class DomainCommand : u8 {
-            SendMessage = 1,
+            SendMessage  = 1,
             CloseVHandle = 2,
         };
 
@@ -125,12 +125,12 @@ namespace skyline {
          * @url https://switchbrew.org/wiki/IPC_Marshalling#Buffer_descriptor_X_.22Pointer.22
          */
         struct BufferDescriptorX {
-            u16 counter0_5 : 6; //!< The first 5 bits of the counter
+            u16 counter0_5   : 6; //!< The first 5 bits of the counter
             u16 address36_38 : 3; //!< Bit 36-38 of the address
-            u16 counter9_11 : 3; //!< Bit 9-11 of the counter
+            u16 counter9_11  : 3; //!< Bit 9-11 of the counter
             u16 address32_35 : 4; //!< Bit 32-35 of the address
-            u16 size : 16; //!< The 16 bit size of the buffer
-            u32 address0_31 : 32; //!< The first 32-bits of the address
+            u16 size         : 16; //!< The 16 bit size of the buffer
+            u32 address0_31  : 32; //!< The first 32-bits of the address
 
             u8 *Pointer() {
                 return reinterpret_cast<u8 *>(static_cast<u64>(address0_31) | static_cast<u64>(address32_35) << 32 | static_cast<u64>(address36_38) << 36);
@@ -146,13 +146,13 @@ namespace skyline {
          * @url https://switchbrew.org/wiki/IPC_Marshalling#Buffer_descriptor_A.2FB.2FW_.22Send.22.2F.22Receive.22.2F.22Exchange.22
          */
         struct BufferDescriptorABW {
-            u32 size0_31 : 32; //!< The first 32 bits of the size
-            u32 address0_31 : 32; //!< The first 32 bits of the address
-            u8 flags : 2; //!< The buffer flags
-            u8 address36_38 : 3; //!< Bit 36-38 of the address
-            u32             : 19;
-            u8 size32_35 : 4; //!< Bit 32-35 of the size
-            u8 address32_35 : 4; //!< Bit 32-35 of the address
+            u32 size0_31     : 32; //!< The first 32 bits of the size
+            u32 address0_31  : 32; //!< The first 32 bits of the address
+            u8  flags        : 2; //!< The buffer flags
+            u8  address36_38 : 3; //!< Bit 36-38 of the address
+            u32              : 19;
+            u8  size32_35    : 4; //!< Bit 32-35 of the size
+            u8  address32_35 : 4; //!< Bit 32-35 of the address
 
             u8 *Pointer() {
                 return reinterpret_cast<u8 *>(static_cast<u64>(address0_31) | static_cast<u64>(address32_35) << 32 | static_cast<u64>(address36_38) << 36);
