@@ -35,7 +35,7 @@ namespace skyline::service::visrv {
           SFUNC(0x7DA, IManagerDisplayService, CreateManagedLayer),
           SFUNC(0x7DB, IManagerDisplayService, DestroyManagedLayer),
           SFUNC_BASE(0x7DC, IManagerDisplayService, IDisplayService, CreateStrayLayer),
-          SFUNC(0x1770, IManagerDisplayService, AddToLayerStack)
+          SFUNC(0x1770, IManagerDisplayService, AddToLayerStack),
           SFUNC(0x1772, IManagerDisplayService, SetLayerVisibility)
       )
     };
