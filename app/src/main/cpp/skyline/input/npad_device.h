@@ -66,10 +66,6 @@ namespace skyline::input {
             bool snes           : 1; //!< SNES controller
             bool n64            : 1; //!< N64 controller
             bool genesis        : 1; //!< Sega Genesis controller
-            bool reserved       : 17;
-            bool systemExt      : 1; //!< generic external controller
-            bool system         : 1; //!< generic controller
-            bool reserved1      : 1;
         };
     };
     static_assert(sizeof(NpadStyleSet) == 0x4);
@@ -107,9 +103,9 @@ namespace skyline::input {
         u32 raw;
         struct {
             u8 type;
-            NpadId id : 8;
-            bool isRight : 1; //!< If this is a right Joy-Con (Both) or right LRA in the Pro-Controller (Vibration)
-            bool isSixAxisSingle : 1; //!< If the Six-Axis device is a single unit, either Handheld or Pro-Controller
+            NpadId id              : 8;
+            bool   isRight         : 1; //!< If this is a right Joy-Con (Both) or right LRA in the Pro-Controller (Vibration)
+            bool   isSixAxisSingle : 1; //!< If the Six-Axis device is a single unit, either Handheld or Pro-Controller
         };
 
         constexpr NpadControllerType GetType() const {
