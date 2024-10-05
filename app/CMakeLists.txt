@@ -267,6 +267,7 @@ add_library(skyline SHARED
         ${source_DIR}/skyline/services/settings/ISystemSettingsServer.cpp
         ${source_DIR}/skyline/services/apm/IManager.cpp
         ${source_DIR}/skyline/services/apm/ISession.cpp
+        ${source_DIR}/skyline/services/apm/ISystemManager.cpp
         ${source_DIR}/skyline/services/am/IAllSystemAppletProxiesService.cpp
         ${source_DIR}/skyline/services/am/IApplicationProxyService.cpp
         ${source_DIR}/skyline/services/am/proxy/base_proxy.cpp
@@ -379,9 +380,11 @@ add_library(skyline SHARED
         ${source_DIR}/skyline/services/nifm/IGeneralService.cpp
         ${source_DIR}/skyline/services/nifm/IScanRequest.cpp
         ${source_DIR}/skyline/services/nifm/IRequest.cpp
+        ${source_DIR}/skyline/services/nim/INetworkInstallManager.cpp
         ${source_DIR}/skyline/services/nim/IShopServiceAccessor.cpp
         ${source_DIR}/skyline/services/nim/IShopServiceAccessServer.cpp
         ${source_DIR}/skyline/services/nim/IShopServiceAccessServerInterface.cpp
+        ${source_DIR}/skyline/services/nim/IShopServiceAccessSystemInterface.cpp
         ${source_DIR}/skyline/services/nim/IShopServiceAsync.cpp
         ${source_DIR}/skyline/services/socket/bsd/IClient.cpp
         ${source_DIR}/skyline/services/socket/nsd/IManager.cpp

@@ -176,22 +176,22 @@ namespace skyline {
             constexpr MemoryState Io{0x00182001};
             constexpr MemoryState Static{0x00042002};
             constexpr MemoryState Code{0x04DC7E03};
-            constexpr MemoryState CodeMutable{0x07FEBD04};
+            constexpr MemoryState CodeMutable{0x0FFEBD04};
             constexpr MemoryState Heap{0x077EBD05};
             constexpr MemoryState SharedMemory{0x04402006};
 
             constexpr MemoryState AliasCode{0x04DD7E08};
-            constexpr MemoryState AliasCodeData{0x07FFBD09};
+            constexpr MemoryState AliasCodeData{0x0FFFBD09};
             constexpr MemoryState Ipc{0x045C3C0A};
             constexpr MemoryState Stack{0x045C3C0B};
-            constexpr MemoryState ThreadLocal{0x0400200C};
+            constexpr MemoryState ThreadLocal{0x0400000C};
             constexpr MemoryState TransferMemoryIsolated{0x055C3C0D};
             constexpr MemoryState TransferMemory{0x045C380E};
             constexpr MemoryState SharedCode{0x0440380F};
             constexpr MemoryState Reserved{0x00000010};
             constexpr MemoryState NonSecureIpc{0x045C3811};
             constexpr MemoryState NonDeviceIpc{0x044C2812};
-            constexpr MemoryState KernelStack{0x00002013};
+            constexpr MemoryState KernelStack{0x00000013};
             constexpr MemoryState CodeGenerated{0x04402214};
             constexpr MemoryState CodeExternal{0x04402015};
             constexpr MemoryState Coverage{0x00002016};

@@ -15,7 +15,7 @@ namespace skyline::gpu {
       private:
         std::thread writerThread;
         std::queue<std::unique_ptr<interconnect::PipelineStateBundle>> writeQueue; //!< The queue of pipeline state bundles to be written to the cache
-        std::mutex writeMutex; //!< Protects access to the write queue
+        std::mutex  writeMutex; //!< Protects access to the write queue
         std::condition_variable writeCondition; //!< Notifies the writer thread when the write queue is not empty
         std::string stagingPath; //!< The path to the staging pipeline cache file, which will be actively written to at runtime
         std::string mainPath; //!< The path to the main pipeline cache file

@@ -11,13 +11,13 @@ namespace skyline::service::fssrv {
 
         struct {
             bool directory : 1;
-            bool archive : 1;
-            u8 _pad_ : 6;
+            bool archive   : 1;
+            u8   _pad_     : 6;
         } attributes;
 
         u16 _pad0_;
         vfs::Directory::EntryType type;
-        u8 _pad1_[3];
+        u8  _pad1_[3];
         u64 size;
     };
 

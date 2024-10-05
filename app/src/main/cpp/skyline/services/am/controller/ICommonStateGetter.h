@@ -38,18 +38,18 @@ namespace skyline::service::am {
         std::deque<Message> messageQueue; //!< A queue of all the messages that the program is yet to consume
 
         enum class FocusState : u8 {
-            InFocus = 1,    //!< The application is in foreground
+            InFocus    = 1, //!< The application is in foreground
             OutOfFocus = 2, //!< The application is in the background
         } focusState{FocusState::InFocus};
 
         enum class OperationMode : u8 {
             Handheld = 0, //!< The device is in handheld mode
-            Docked = 1,   //!< The device is in docked mode
+            Docked   = 1,   //!< The device is in docked mode
         } operationMode;
 
         enum class CpuBoostMode : u32 {
-            Normal = 0,     //!< The device runs at stock CPU and CPU clocks
-            FastLoad = 1,   //!< The device runs at boosted CPU clocks and minimum GPU clocks
+            Normal      = 0,     //!< The device runs at stock CPU and CPU clocks
+            FastLoad    = 1,   //!< The device runs at boosted CPU clocks and minimum GPU clocks
             PowerSaving = 2 //!< The device runs at stock CPU clocks and minimum GPU clocks
         } cpuBoostMode;
 

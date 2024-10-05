@@ -34,6 +34,10 @@ namespace skyline::service::aocsrv {
 
         Result GetAddOnContentListChangedEventWithProcessId(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
 
+        Result NotifyMountAddOnContent(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
+
+        Result NotifyUnmountAddOnContent(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
+
         Result CheckAddOnContentMountStatus(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
 
         Result CreateEcPurchasedEventManager(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
@@ -45,6 +49,8 @@ namespace skyline::service::aocsrv {
             SFUNC(0x7, IAddOnContentManager, PrepareAddOnContent),
             SFUNC(0x8, IAddOnContentManager, GetAddOnContentListChangedEvent),
             SFUNC(0xA, IAddOnContentManager, GetAddOnContentListChangedEventWithProcessId),
+            SFUNC(0xB, IAddOnContentManager, NotifyMountAddOnContent),
+            SFUNC(0xC, IAddOnContentManager, NotifyUnmountAddOnContent),
             SFUNC(0x32, IAddOnContentManager, CheckAddOnContentMountStatus),
             SFUNC(0x64, IAddOnContentManager, CreateEcPurchasedEventManager)
         )

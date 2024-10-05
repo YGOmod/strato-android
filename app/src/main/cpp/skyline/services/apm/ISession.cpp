@@ -19,4 +19,10 @@ namespace skyline::service::apm {
         response.Push<u32>(performanceConfig.at(performanceMode));
         return {};
     }
+
+    Result ISession::SetCpuOverclockEnabled(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response) {
+        bool cpuOverclockEnabled{request.Pop<bool>()};
+        LOGI("SetCpuOverclockEnabled={}", cpuOverclockEnabled);
+        return {};
+    }
 }

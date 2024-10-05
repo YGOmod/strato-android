@@ -68,8 +68,8 @@ namespace skyline::applet {
             using IdentificationColor = std::array<u8, 4>; // RGBA colour code
             using ExplainText = std::array<char, 128 + 1>; // 128 chars + null terminator
 
-            i8 playerCountMin{};
-            i8 playerCountMax{};
+            i8   playerCountMin{};
+            i8   playerCountMax{};
             bool enableTakeOverConnection{};
             bool enableLeftJustify{};
             bool enablePermitJoyDual{};

@@ -8,21 +8,21 @@
 
 namespace skyline::service::fssrv {
     enum class SaveDataSpaceId : u64 {
-        System = 0, //!< Savedata should be stored in the EMMC system folder
-        User = 1, //!< Savedata should be stored in the EMMC user folder
-        SdSystem = 2, //!< Savedata should be stored in the SDCard system folder
-        Temporary = 3, //!< Savedata should be stored in a temporary folder
-        SdCache = 4, //!< Savedata should be stored in the SDCard system folder
+        System       = 0, //!< Savedata should be stored in the EMMC system folder
+        User         = 1, //!< Savedata should be stored in the EMMC user folder
+        SdSystem     = 2, //!< Savedata should be stored in the SDCard system folder
+        Temporary    = 3, //!< Savedata should be stored in a temporary folder
+        SdCache      = 4, //!< Savedata should be stored in the SDCard system folder
         ProperSystem = 100, //!< Savedata should be stored in the system partition
     };
 
     enum class SaveDataType : u8 {
-        System = 0, //!< System savedata
-        Account = 1, //!< User game savedata
-        Bcat = 2, //!< User BCAT savedata
-        Device = 3, //!< Device-wide savedata
-        Temporary = 4, //!< Temporary savedata
-        Cache = 5, //!< Cache savedata
+        System     = 0, //!< System savedata
+        Account    = 1, //!< User game savedata
+        Bcat       = 2, //!< User BCAT savedata
+        Device     = 3, //!< Device-wide savedata
+        Temporary  = 4, //!< Temporary savedata
+        Cache      = 5, //!< Cache savedata
         SystemBcat = 6, //!< Device-wide BCAT savedata
     };
 
@@ -43,12 +43,12 @@ namespace skyline::service::fssrv {
     static_assert(sizeof(SaveDataAttribute) == 0x40);
 
     enum class StorageId : u8 {
-        None = 0,
-        Host = 1,
-        GameCard = 2,
+        None       = 0,
+        Host       = 1,
+        GameCard   = 2,
         NandSystem = 3,
-        NandUser = 4,
-        SdCard = 5,
+        NandUser   = 4,
+        SdCard     = 5,
     };
 
     /**

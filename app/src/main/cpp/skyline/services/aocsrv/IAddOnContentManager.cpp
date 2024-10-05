@@ -46,6 +46,14 @@ namespace skyline::service::aocsrv {
         return {};
     }
 
+    Result IAddOnContentManager::NotifyMountAddOnContent(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response) {
+        return {};
+    }
+
+    Result IAddOnContentManager::NotifyUnmountAddOnContent(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response) {
+        return {};
+    }
+
     Result IAddOnContentManager::CheckAddOnContentMountStatus(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response) {
         return {};
     }

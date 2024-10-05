@@ -40,19 +40,20 @@ namespace skyline {
                         bool is64Bit : 1;
                         memory::AddressSpaceType type : 2;
                         bool optimizeMemoryAllocation : 1;
+                        bool disableDeviceAddressSpaceMerge : 1;
                     };
                     u8 raw{};
                 } flags;
-                u8 _unk1_;
-                i8 mainThreadPriority;
-                u8 idealCore;
+                u8  _unk1_;
+                i8  mainThreadPriority;
+                u8  idealCore;
                 u32 _unk2_;
                 u32 systemResourceSize; //!< 3.0.0+
                 u32 version;
                 u32 mainThreadStackSize;
                 std::array<char, 0x10> name; //!< "Application"
                 std::array<u8, 0x10> productCode;
-                u8 _unk3_[0x30];
+                u8  _unk3_[0x30];
                 Section aci0;
                 Section acid;
             } meta;
@@ -84,19 +85,19 @@ namespace skyline {
                  * @note Priority field names are based on real scheduler priority (Lower value is higher priority)
                  */
                 struct __attribute__((packed)) {
-                    u8 pattern : 4; //!< 0b0111
-                    u8 lowestPriority : 6;
+                    u8 pattern         : 4; //!< 0b0111
+                    u8 lowestPriority  : 6;
                     u8 highestPriority : 6;
-                    u8 minCoreId : 8;
-                    u8 maxCoreId : 8;
+                    u8 minCoreId       : 8;
+                    u8 maxCoreId       : 8;
                 } threadInfo;
 
                 /**
                  * @url https://switchbrew.org/wiki/NPDM#KernelVersion
                  */
                 struct __attribute__((packed)) {
-                    u16 pattern : 15; //!< 0b011111111111111
-                    u8 minorVersion : 4;
+                    u16 pattern      : 15; //!< 0b011111111111111
+                    u8  minorVersion :  4;
                     u16 majorVersion : 13;
                 } kernelVersion;
 
@@ -110,7 +111,7 @@ namespace skyline {
             } threadInfo;
 
             struct {
-                u8 minorVersion;
+                u8  minorVersion;
                 u16 majorVersion;
             } kernelVersion{};
 

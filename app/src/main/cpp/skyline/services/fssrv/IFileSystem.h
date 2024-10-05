@@ -103,6 +103,8 @@ namespace skyline::service::fssrv {
             SFUNC(0xC, IFileSystem, GetTotalSpaceSize),
             SFUNC(0xD, IFileSystem, CleanDirectoryRecursively),
             SFUNC(0xE, IFileSystem, GetFileTimeStampRaw)
+            //SFUNC(0xF, IFileSystem, QueryEntry)
+            //SFUNC(0x10, IFileSystem, GetFileSystemAttribute)
         )
     };
 }

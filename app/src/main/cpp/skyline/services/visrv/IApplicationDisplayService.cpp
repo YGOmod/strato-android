@@ -69,6 +69,10 @@ namespace skyline::service::visrv {
         return {};
     }
 
+    Result IApplicationDisplayService::SetDisplayEnabled(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response) {
+        return {};
+    }
+
     Result IApplicationDisplayService::OpenLayer(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response) {
         auto displayName{request.PopString(0x40)};
         auto layerId{request.Pop<u64>()};

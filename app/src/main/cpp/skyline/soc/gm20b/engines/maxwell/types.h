@@ -19,12 +19,12 @@ namespace skyline::soc::gm20b::engine::maxwell3d::type {
     };
 
     struct SyncpointAction {
-        u16 id : 12;
-        u8 _pad0_ : 4;
+        u16  id         : 12;
+        u8   _pad0_     : 4;
         bool flushCache : 1;
-        u8 _pad1_ : 3;
-        bool increment : 1;
-        u16 _pad2_ : 11;
+        u8   _pad1_     : 3;
+        bool increment  : 1;
+        u16  _pad2_     : 11;
     };
     static_assert(sizeof(SyncpointAction) == sizeof(u32));
 

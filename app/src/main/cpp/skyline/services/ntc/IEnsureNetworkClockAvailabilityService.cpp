@@ -14,4 +14,8 @@ namespace skyline::service::ntc {
         finishNotificationEvent->Signal();
         return {};
     }
+
+    Result IEnsureNetworkClockAvailabilityService::GetResult(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response) {
+        return {};
+    }
 }

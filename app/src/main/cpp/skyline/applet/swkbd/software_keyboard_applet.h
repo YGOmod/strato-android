@@ -21,7 +21,7 @@ namespace skyline::applet::swkbd {
          * @url https://switchbrew.org/wiki/Software_Keyboard#CloseResult
          */
         enum class CloseResult : u32 {
-            Enter = 0x0,
+            Enter  = 0x0,
             Cancel = 0x1,
         };
 
@@ -29,7 +29,7 @@ namespace skyline::applet::swkbd {
          * @url https://switchbrew.org/wiki/Software_Keyboard#TextCheckResult
          */
         enum class TextCheckResult : u32 {
-            Success = 0x0,
+            Success           = 0x0,
             ShowFailureDialog = 0x1,
             ShowConfirmDialog = 0x2,
         };

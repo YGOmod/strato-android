@@ -13,16 +13,16 @@ namespace skyline::service::lm {
     class ILogger : public BaseService {
       private:
         enum class LogFieldType : u8 {
-            Start = 0, //!< The first log message in the stream
-            Stop = 1, //!< The final log message in the stream
-            Message = 2, //!< A log field with a general message
-            Line = 3, //!< A log field with a line number
-            Filename = 4, //!< A log field with a filename
-            Function = 5, //!< A log field with a function name
-            Module = 6, //!< A log field with a module name
-            Thread = 7, //!< A log field with a thread name
-            DropCount = 8, //!< A log field with the number of dropped messages
-            Time = 9, //!< A log field with a timestamp
+            Start       = 0, //!< The first log message in the stream
+            Stop        = 1, //!< The final log message in the stream
+            Message     = 2, //!< A log field with a general message
+            Line        = 3, //!< A log field with a line number
+            Filename    = 4, //!< A log field with a filename
+            Function    = 5, //!< A log field with a function name
+            Module      = 6, //!< A log field with a module name
+            Thread      = 7, //!< A log field with a thread name
+            DropCount   = 8, //!< A log field with the number of dropped messages
+            Time        = 9, //!< A log field with a timestamp
             ProgramName = 10, //!< A log field with the program's name
         };
 

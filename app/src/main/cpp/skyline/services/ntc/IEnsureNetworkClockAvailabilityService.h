@@ -22,8 +22,11 @@ namespace skyline::service::ntc {
 
         Result StartTask(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
 
+        Result GetResult(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
+
         SERVICE_DECL(
-            SFUNC(0x0, IEnsureNetworkClockAvailabilityService, StartTask)
+            SFUNC(0x0, IEnsureNetworkClockAvailabilityService, StartTask),
+            SFUNC(0x2, IEnsureNetworkClockAvailabilityService, GetResult)
         )
     };
 }

@@ -29,7 +29,7 @@ namespace skyline::applet {
         };
 
         /**
-         * @url https://switchbrew.org/wiki/Error_Applet#ErrorCommonHeader
+         * @url https://switchbrew.org/wiki/Error_Applet#ErrorViewerStartupParamCommon
          */
         struct ErrorCommonHeader {
             ErrorType type;

@@ -71,6 +71,11 @@ namespace skyline::service::visrv {
         Result CloseDisplay(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
 
         /**
+         * @url https://switchbrew.org/wiki/Display_services#SetDisplayEnabled
+         */
+        Result SetDisplayEnabled(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
+
+        /**
          * @brief Opens a specific layer on a display
          * @url https://switchbrew.org/wiki/Display_services#OpenLayer
          */
@@ -119,6 +124,7 @@ namespace skyline::service::visrv {
           SFUNC(0x3E8, IApplicationDisplayService, ListDisplays),
           SFUNC(0x3F2, IApplicationDisplayService, OpenDisplay),
           SFUNC(0x3FC, IApplicationDisplayService, CloseDisplay),
+          SFUNC(0x44D, IApplicationDisplayService, SetDisplayEnabled),
           SFUNC(0x7E4, IApplicationDisplayService, OpenLayer),
           SFUNC(0x7E5, IApplicationDisplayService, CloseLayer),
           SFUNC_BASE(0x7EE, IApplicationDisplayService, IDisplayService, CreateStrayLayer),

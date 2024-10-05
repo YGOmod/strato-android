@@ -41,7 +41,7 @@ namespace skyline::service::hosbinder {
      */
     struct BufferSlot {
         BufferState state{BufferState::Free};
-        u64 frameNumber{}; //!< The amount of frames that have been queued using this slot
+        u64  frameNumber{}; //!< The amount of frames that have been queued using this slot
         bool wasBufferRequested{}; //!< If GraphicBufferProducer::RequestBuffer has been called with this buffer
         bool isPreallocated{}; //!< If this slot's graphic buffer has been preallocated or attached
         AndroidFence fence{};
@@ -65,8 +65,8 @@ namespace skyline::service::hosbinder {
         std::condition_variable freeCondition; //!< Used to wait for a free buffer slot
         constexpr static u8 MaxSlotCount{16}; //!< The maximum amount of buffer slots that a buffer queue can hold, Android supports 64 but they go unused for applications like games so we've lowered this to 16 (https://cs.android.com/android/platform/superproject/+/android-5.1.1_r38:frameworks/native/include/gui/BufferQueueDefs.h;l=29)
         std::array<BufferSlot, MaxSlotCount> queue;
-        u8 activeSlotCount{}; //!< The amount of slots in the queue that can be dequeued
-        u8 preallocatedBufferCount{}; //!< The amount of slots with buffers attached in the queue
+        u8  activeSlotCount{}; //!< The amount of slots in the queue that can be dequeued
+        u8  preallocatedBufferCount{}; //!< The amount of slots with buffers attached in the queue
         u32 defaultWidth{1}; //!< The assumed width of a buffer if none is supplied in DequeueBuffer
         u32 defaultHeight{1}; //!< The assumed height of a buffer if none is supplied in DequeueBuffer
         AndroidPixelFormat defaultFormat{AndroidPixelFormat::RGBA8888}; //!< The assumed format of a buffer if none is supplied in DequeueBuffer

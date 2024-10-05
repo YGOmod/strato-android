@@ -12,16 +12,16 @@ namespace skyline::applet::swkbd {
      * @url https://switchbrew.org/wiki/Software_Keyboard#KeyboardMode
      */
     enum class KeyboardMode : u32 {
-        Full = 0x0,
-        Numeric = 0x1,
-        ASCII = 0x2,
-        FullLatin = 0x3,
-        Alphabet = 0x4,
-        SimplifiedChinese = 0x5,
+        Full               = 0x0,
+        Numeric            = 0x1,
+        ASCII              = 0x2,
+        FullLatin          = 0x3,
+        Alphabet           = 0x4,
+        SimplifiedChinese  = 0x5,
         TraditionalChinese = 0x6,
-        Korean = 0x7,
-        LanguageSet2 = 0x8,
-        LanguageSet2Latin = 0x9,
+        Korean             = 0x7,
+        LanguageSet2       = 0x8,
+        LanguageSet2Latin  = 0x9,
     };
 
     /**
@@ -31,15 +31,15 @@ namespace skyline::applet::swkbd {
     union InvalidCharFlags {
         u32 raw;
         struct {
-            u32 _pad_ : 1;
-            u32 space : 1;
-            u32 atMark : 1;
-            u32 percent : 1;
-            u32 slash : 1;
-            u32 backslash : 1;
-            u32 numeric : 1;
+            u32 _pad_                 : 1;
+            u32 space                 : 1;
+            u32 atMark                : 1;
+            u32 percent               : 1;
+            u32 slash                 : 1;
+            u32 backslash             : 1;
+            u32 numeric               : 1;
             u32 outsideOfDownloadCode : 1;
-            u32 outsideOfMiiNickName : 1;
+            u32 outsideOfMiiNickName  : 1;
         } flags;
     };
 
@@ -49,7 +49,7 @@ namespace skyline::applet::swkbd {
      */
     enum class InitialCursorPos : u32 {
         First = 0x0,
-        Last = 0x1,
+        Last  = 0x1,
     };
 
     /**
@@ -65,9 +65,9 @@ namespace skyline::applet::swkbd {
      * @note Only applies when 1 <= textMaxLength <= 32, otherwise Multiline is used
      */
     enum class InputFormMode : u32 {
-        OneLine = 0x0,
+        OneLine   = 0x0,
         MultiLine = 0x1,
-        Separate = 0x2, //!< Used with separateTextPos
+        Separate  = 0x2, //!< Used with separateTextPos
     };
 
     /**
@@ -146,7 +146,7 @@ namespace skyline::applet::swkbd {
      */
     struct KeyboardConfigV0 {
         CommonKeyboardConfig commonConfig;
-        u8 _pad0_[0x4];
+        u8  _pad0_[0x4];
         u64 textCheckCallback{};
     };
     static_assert(sizeof(KeyboardConfigV0) == 0x3E0);
@@ -157,7 +157,7 @@ namespace skyline::applet::swkbd {
      */
     struct KeyboardConfigV7 {
         CommonKeyboardConfig commonConfig;
-        u8 _pad0_[0x4];
+        u8  _pad0_[0x4];
         u64 textCheckCallback;
         std::array<u32, 0x8> separateTextPos;
     };
@@ -173,9 +173,9 @@ namespace skyline::applet::swkbd {
         std::array<DictionaryInfo, 0x18> customisedDictionaryInfoList{};
         u8 customisedDictionaryCount{};
         bool isCancelButtonDisabled{};
-        u8 reserved0[0xD];
-        u8 trigger{};
-        u8 reserved1[0x4];
+        u8   reserved0[0xD];
+        u8   trigger{};
+        u8   reserved1[0x4];
 
         KeyboardConfigVB();
 

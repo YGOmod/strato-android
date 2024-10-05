@@ -20,15 +20,24 @@ namespace skyline::service::am {
          */
         Result GetAppletResourceUserId(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
 
+        Result GetAppletResourceUserIdOfCallerApplet(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
+
         /**
          * @brief This function has no inputs or outputs (Stubbed)
          * @url https://switchbrew.org/wiki/Applet_Manager_services#AcquireForegroundRights
          */
         Result AcquireForegroundRights(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
 
+        Result AcquireForegroundRights(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
+
+        Result AcquireForegroundRights(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
+
         SERVICE_DECL(
             SFUNC(0x1, IWindowController, GetAppletResourceUserId),
-            SFUNC(0xA, IWindowController, AcquireForegroundRights)
+            SFUNC(0x2, IWindowController, GetAppletResourceUserIdOfCallerApplet),
+            SFUNC(0xA, IWindowController, AcquireForegroundRights),
+            SFUNC(0xB, IWindowController, ReleaseForegroundRights),
+            SFUNC(0xC, IWindowController, RejectToChangeIntoBackground)
         )
     };
 }

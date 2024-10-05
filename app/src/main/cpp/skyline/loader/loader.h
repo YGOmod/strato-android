@@ -78,9 +78,9 @@ namespace skyline::loader {
          * @brief Information about the placement of an executable in memory
          */
         struct ExecutableLoadInfo {
-            u8 *base; //!< The base of the loaded executable
-            size_t size; //!< The total size of the loaded executable
-            void *entry; //!< The entry point of the loaded executable
+            u8      *base; //!< The base of the loaded executable
+            size_t   size; //!< The total size of the loaded executable
+            void   *entry; //!< The entry point of the loaded executable
         };
 
         /**

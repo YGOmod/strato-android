@@ -115,10 +115,10 @@ namespace skyline {
          */
         enum class ControlCommand : u32 {
             ConvertCurrentObjectToDomain = 0, //!< Converts a regular IPC session into a domain session
-            CopyFromCurrentDomain = 1,
-            CloneCurrentObject = 2,           //!< Creates a duplicate of the current session
-            QueryPointerBufferSize = 3,       //!< The size of the X buffers written by the servers (and by extension C-buffers supplied by the client)
-            CloneCurrentObjectEx = 4,         //!< Same as CloneCurrentObject
+            CopyFromCurrentDomain        = 1,
+            CloneCurrentObject           = 2, //!< Creates a duplicate of the current session
+            QueryPointerBufferSize       = 3, //!< The size of the X buffers written by the servers (and by extension C-buffers supplied by the client)
+            CloneCurrentObjectEx         = 4, //!< Same as CloneCurrentObject
         };
 
         /**
@@ -169,7 +169,7 @@ namespace skyline {
          */
         struct BufferDescriptorC {
             u64 address : 48; //!< The 48-bit address of the buffer
-            u32 size : 16; //!< The 16-bit size of the buffer
+            u32 size    : 16; //!< The 16-bit size of the buffer
 
             u8 *Pointer() {
                 return reinterpret_cast<u8 *>(address);

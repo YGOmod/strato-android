@@ -17,10 +17,15 @@ namespace skyline::service::mmnv {
          * @brief Enumerates the modules that can be controlled by mmnv, these are passed directly to FGM services
          */
         enum class ModuleType : u32 {
-            Ram = 2,
-            NvEnc = 5,
-            NvDec = 6,
-            NvJpg = 7
+            Cpu     = 0,
+            Gpu     = 1,
+            Ram     = 2,
+            SysBus  = 3,
+            Mselect = 4,
+            NvDec   = 5,
+            NvEnc   = 6,
+            NvJpg   = 7,
+            Test    = 8
         };
 
         /**

@@ -19,23 +19,23 @@ namespace skyline::applet {
          * @url https://switchbrew.org/wiki/Internet_Browser#ShimKind
          */
         enum class ShimKind : u32 {
-            Shop = 1,
-            Login = 2,
+            Shop    = 1,
+            Login   = 2,
             Offline = 3,
-            Share = 4,
-            Web = 5,
-            Wifi = 6,
-            Lobby = 7,
-            Lhub = 8,
+            Share   = 4,
+            Web     = 5,
+            Wifi    = 6,
+            Lobby   = 7,
+            Lhub    = 8,
         };
 
         enum class WebExitReason : u32 {
-            EndButtonPressed = 0,
+            EndButtonPressed  = 0,
             BackButtonPressed = 1,
-            ExitRequested = 2,
-            CallbackURL = 3,
-            WindowClosed = 4,
-            ErrorDialog = 7,
+            ExitRequested     = 2,
+            CallbackURL       = 3,
+            WindowClosed      = 4,
+            ErrorDialog       = 7,
         };
 
         /**

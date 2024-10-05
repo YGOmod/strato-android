@@ -14,14 +14,14 @@ namespace skyline::soc::gm20b {
      * @brief Mapping of subchannel names to their corresponding subchannel IDs
      */
     enum class SubchannelId : u8 {
-        ThreeD = 0,
-        Compute = 1,
+        ThreeD     = 0,
+        Compute    = 1,
         Inline2Mem = 2,
-        TwoD = 3,
-        Copy = 4,
-        Software0 = 5,
-        Software1 = 6,
-        Software2 = 7,
+        TwoD       = 3,
+        Copy       = 4,
+        Software0  = 5,
+        Software1  = 6,
+        Software2  = 7,
     };
 
     /**
@@ -32,7 +32,7 @@ namespace skyline::soc::gm20b {
     struct GpEntry {
         enum class Fetch : u8 {
             Unconditional = 0,
-            Conditional = 1,
+            Conditional   = 1,
         };
 
         union {
@@ -40,8 +40,8 @@ namespace skyline::soc::gm20b {
 
             struct {
                 Fetch fetch : 1;
-                u8 _pad_ : 1;
-                u32 get : 30;
+                u8    _pad_ : 1;
+                u32   get   : 30;
             };
         };
 

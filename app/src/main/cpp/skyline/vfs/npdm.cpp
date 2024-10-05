@@ -18,7 +18,8 @@ namespace skyline::vfs {
                 {
                     .is64Bit = true,
                     .type = memory::AddressSpaceType::AddressSpace39Bit,
-                    .optimizeMemoryAllocation = false,
+                    .optimizeMemoryAllocation = true,
+                    .disableDeviceAddressSpaceMerge = false,
                 }
             },
             .mainThreadPriority = DefaultPriority,

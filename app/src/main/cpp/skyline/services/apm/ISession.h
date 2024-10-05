@@ -28,9 +28,12 @@ namespace skyline::service::apm {
          */
         Result GetPerformanceConfiguration(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
 
+        Result SetCpuOverclockEnabled(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
+
         SERVICE_DECL(
             SFUNC(0x0, ISession, SetPerformanceConfiguration),
             SFUNC(0x1, ISession, GetPerformanceConfiguration),
+            SFUNC(0x2, ISession, SetCpuOverclockEnabled)
         )
     };
 }
