@@ -28,9 +28,9 @@ namespace skyline::service::am {
          */
         Result AcquireForegroundRights(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
 
-        Result AcquireForegroundRights(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
+        Result ReleaseForegroundRights(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
 
-        Result AcquireForegroundRights(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
+        Result RejectToChangeIntoBackground(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
 
         SERVICE_DECL(
             SFUNC(0x1, IWindowController, GetAppletResourceUserId),
