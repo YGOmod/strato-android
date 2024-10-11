@@ -46,25 +46,25 @@ namespace skyline::soc::gm20b {
         };
 
         enum class Opcode : u8 {
-            Nop = 0,
+            Nop     = 0,
             Illegal = 1,
-            Crc = 2,
-            PbCrc = 3,
+            Crc     = 2,
+            PbCrc   = 3,
         };
 
         enum class Priv : u8 {
-            User = 0,
+            User   = 0,
             Kernel = 1,
         };
 
         enum class Level : u8 {
-            Main = 0,
+            Main       = 0,
             Subroutine = 1,
         };
 
         enum class Sync : u8 {
             Proceed = 0,
-            Wait = 1,
+            Wait    = 1,
         };
 
         union {
@@ -72,21 +72,21 @@ namespace skyline::soc::gm20b {
 
             struct {
                 union {
-                    u8 getHi;
+                    u8     getHi;
                     Opcode opcode;
                 };
 
-                Priv priv : 1;
+                Priv  priv  : 1;
                 Level level : 1;
-                u32 size : 21;
-                Sync sync : 1;
+                u32   size  : 21;
+                Sync  sync  : 1;
             };
         };
 
         constexpr GpEntry(u64 gpuAddress, u32 pSize) {
             getHi = static_cast<u8>(gpuAddress >> 32);
-            get = static_cast<u32>(gpuAddress >> 2);
-            size = pSize;
+            get   = static_cast<u32>(gpuAddress >> 2);
+            size  = pSize;
         }
 
         constexpr u64 Address() const {

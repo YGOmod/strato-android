@@ -7,7 +7,7 @@
 #include <common/address_space.h>
 
 namespace skyline::soc::gm20b {
-    static constexpr u8 GmmuAddressSpaceBits{40}; //!< The size of the GMMU AS in bits
+    static constexpr u8     GmmuAddressSpaceBits{40}; //!< The size of the GMMU AS in bits
     static constexpr size_t GmmuSmallPageSize{0x1000}; // 4KiB
     static constexpr size_t GmmuSmallPageSizeBits{std::countr_zero(GmmuSmallPageSize)};
     static constexpr size_t GmmuMinBigPageSize{0x20000}; // 128KiB

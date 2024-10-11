@@ -11,9 +11,9 @@ namespace skyline::soc::host1x {
      */
     enum class ClassId : u16 {
         Host1x = 0x1,
-        VIC = 0x5D,
-        NvJpg = 0xC0,
-        NvDec = 0xF0
+        VIC    = 0x5D,
+        NvJpg  = 0xC0,
+        NvDec  = 0xF0
     };
 
     constexpr static u32 IncrementSyncpointMethodId{0}; //!< See below
