@@ -249,6 +249,7 @@ add_library(skyline SHARED
         ${source_DIR}/skyline/vfs/os_backing.cpp
         ${source_DIR}/skyline/vfs/android_asset_filesystem.cpp
         ${source_DIR}/skyline/vfs/android_asset_backing.cpp
+        ${source_DIR}/skyline/vfs/cnmt.cpp
         ${source_DIR}/skyline/vfs/nacp.cpp
         ${source_DIR}/skyline/vfs/npdm.cpp
         ${source_DIR}/skyline/vfs/nca.cpp
