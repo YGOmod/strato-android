@@ -3,7 +3,6 @@
 
 #include <kernel/types/KProcess.h>
 #include <vfs/ticket.h>
-#include "cnmt.h"
 #include "nca.h"
 #include "nsp.h"
 

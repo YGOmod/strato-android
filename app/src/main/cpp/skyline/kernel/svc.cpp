@@ -960,6 +960,8 @@ namespace skyline::kernel::svc {
             // 6.0.0+
             TotalMemoryAvailableWithoutSystemResource = 21,
             TotalMemoryUsageWithoutSystemResource = 22,
+            // 18.0.0+
+            AliasRegionExtraSize = 28,
         };
 
         InfoState info{static_cast<u32>(ctx.w1)};
@@ -1053,6 +1055,10 @@ namespace skyline::kernel::svc {
 
             case InfoState::UserExceptionContextAddr:
                 out = state.process->memory.TranslateHostAddress(state.process->tlsExceptionContext);
+                break;
+            
+            case InfoState::AliasRegionExtraSize:
+                out = 0; // We stub it for now
                 break;
 
             default:
@@ -1492,7 +1498,7 @@ namespace skyline::kernel::svc {
         SVC_NONE, // 0x7E
         SVC_NONE, // 0x7F
         SVC_NONE, // 0x90
-        SVC_NONE // 0x91
+        SVC_NONE  // 0x91
     };
 
     #undef SVC_NONE

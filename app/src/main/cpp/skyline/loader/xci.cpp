@@ -4,7 +4,6 @@
 #include <common.h>
 #include <kernel/types/KProcess.h>
 #include <vfs/region_backing.h>
-#include "cnmt.h"
 #include "nca.h"
 #include "xci.h"
 
