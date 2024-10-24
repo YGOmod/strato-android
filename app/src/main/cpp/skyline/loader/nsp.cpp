@@ -37,8 +37,6 @@ namespace skyline::loader {
                     programNca = std::move(nca);
                 else if (nca.contentType == vfs::NcaContentType::Control && nca.romFs != nullptr)
                     controlNca = std::move(nca);
-                else if (nca.contentType == vfs::NcaContentType::Meta)
-                    metaNca = std::move(nca);
             } catch (const loader_exception &e) {
                 throw loader_exception(e.error);
             } catch (const std::exception &e) {
@@ -46,15 +44,12 @@ namespace skyline::loader {
             }
         }
 
-        if (programNca)
-            romFs = programNca->romFs;
+        if (!programNca || !controlNca)
+            throw exception("Incomplete NSP file");
 
-        if (controlNca) {
-            controlRomFs = std::make_shared<vfs::RomFileSystem>(controlNca->romFs);
-            nacp.emplace(controlRomFs->OpenFile("control.nacp"));
-        }
-        if (metaNca)
-            cnmt = vfs::CNMT(metaNca->cnmt);
+        romFs = programNca->romFs;
+        controlRomFs = std::make_shared<vfs::RomFileSystem>(controlNca->romFs);
+        nacp.emplace(controlRomFs->OpenFile("control.nacp"));
     }
 
     void *NspLoader::LoadProcessData(const std::shared_ptr<kernel::type::KProcess> &process, const DeviceState &state) {
