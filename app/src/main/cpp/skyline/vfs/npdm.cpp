@@ -7,12 +7,8 @@
 namespace skyline::vfs {
     constexpr u32 MetaMagic{util::MakeMagic<u32>("META")};
 
-    NPDM::NPDM() {
-        constexpr i8 DefaultPriority{44}; // The default priority of an HOS process
-        constexpr i8 DefaultCore{0}; // The default core for an HOS process
-        constexpr u64 DefaultStackSize{0x200000}; //!< The default amount of stack: 2 MiB
-        constexpr u64 DefaultSystemResourceSize{0x1FE00000}; //!< The amount of memory reserved for system resources, it's the maximum at 510 MiB
-        meta = NpdmMeta{
+    NPDM::NPDM()
+        : meta{
             .magic = MetaMagic,
             .flags = {
                 {
@@ -22,20 +18,20 @@ namespace skyline::vfs {
                     .disableDeviceAddressSpaceMerge = false,
                 }
             },
-            .mainThreadPriority = DefaultPriority,
-            .idealCore = DefaultCore,
-            .mainThreadStackSize = DefaultStackSize,
-            .systemResourceSize = DefaultSystemResourceSize,
+            .mainThreadPriority = 44,         // DefaultPriority
+            .idealCore = 0,                   // DefaultCore
+            .mainThreadStackSize = 0x200000,  // DefaultStackSize
+            .systemResourceSize = 0x1FE00000, // DefaultSystemResourceSize
             .name = "Application",
-        };
-        aci0 = {
+        },
+        aci0{
             .magic = MetaMagic,
-        };
-        threadInfo = {
+        },
+        threadInfo{
             .coreMask = 0b0111,
             .priority = {0, 59},
-        };
-    }
+        }
+    {}
 
     NPDM::NPDM(const std::shared_ptr<vfs::Backing> &backing) {
         meta = backing->Read<NpdmMeta>();
