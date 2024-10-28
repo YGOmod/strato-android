@@ -14,7 +14,7 @@ namespace skyline::service {
             size_t length{};
             std::unique_ptr<char, decltype(&std::free)> demangled{abi::__cxa_demangle(mangledName, nullptr, &length, &status), std::free};
 
-            name = (status == 0) ? std::string(demangled.get() + std::char_traits<char>::length("skyline::service::")) : mangledName;
+            name = (status == 0) ? std::string(static_cast<char*>(demangled.get()) + std::char_traits<char>::length("skyline::service::")) : mangledName;
         }
         return name;
     }
