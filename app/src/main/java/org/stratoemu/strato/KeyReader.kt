@@ -23,7 +23,8 @@ object KeyReader {
     }
 
     enum class KeyType(val keyName : String, val fileName : String) {
-        Title("title_keys", "title.keys"), Prod("prod_keys", "prod.keys");
+        Title("title_keys", "title.keys"),
+        Prod("prod_keys", "prod.keys");
 
         companion object {
             fun parse(keyName : String) = values().first { it.keyName == keyName }

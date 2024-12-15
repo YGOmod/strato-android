@@ -143,25 +143,25 @@ namespace skyline {
 
             struct {
                 MemoryType type;
-                bool permissionChangeAllowed : 1; //!< If the application can use svcSetMemoryPermission on this block
+                bool permissionChangeAllowed          : 1; //!< If the application can use svcSetMemoryPermission on this block
                 bool forceReadWritableByDebugSyscalls : 1; //!< If the application can use svcWriteDebugProcessMemory on this block
-                bool ipcSendAllowed : 1; //!< If this block is allowed to be sent as an IPC buffer with flags=0
-                bool nonDeviceIpcSendAllowed : 1; //!< If this block is allowed to be sent as an IPC buffer with flags=3
-                bool nonSecureIpcSendAllowed : 1; //!< If this block is allowed to be sent as an IPC buffer with flags=1
-                bool isMappedInKernel : 1; //!< If this block is mapped in kernel
-                bool processPermissionChangeAllowed : 1; //!< If the application can use svcSetProcessMemoryPermission on this block
-                bool mapAllowed : 1; //!< If the application can use svcMapMemory on this block
-                bool unmapProcessCodeMemoryAllowed : 1; //!< If the application can use svcUnmapProcessCodeMemory on this block
-                bool transferMemoryAllowed : 1; //!< If the application can use svcCreateTransferMemory on this block
-                bool queryPhysicalAddressAllowed : 1; //!< If the application can use svcQueryPhysicalAddress on this block
-                bool mapDeviceAllowed : 1; //!< If the application can use svcMapDeviceAddressSpace or svcMapDeviceAddressSpaceByForce on this block
-                bool mapDeviceAlignedAllowed : 1; //!< If the application can use svcMapDeviceAddressSpaceAligned on this block
-                bool ipcBufferAllowed : 1; //!< If the application can use this block with svcSendSyncRequestWithUserBuffer
-                bool isReferenceCounted : 1; //!< If the physical memory blocks backing this region are reference counted
-                bool mapProcessAllowed : 1; //!< If the application can use svcMapProcessMemory on this block
-                bool attributeChangeAllowed : 1; //!< If the application can use svcSetMemoryAttribute on this block
-                bool codeMemoryAllowed : 1; //!< If the application can use svcCreateCodeMemory on this block
-                bool isLinearMapped : 1; //!< If this block is mapped linearly
+                bool ipcSendAllowed                   : 1; //!< If this block is allowed to be sent as an IPC buffer with flags=0
+                bool nonDeviceIpcSendAllowed          : 1; //!< If this block is allowed to be sent as an IPC buffer with flags=3
+                bool nonSecureIpcSendAllowed          : 1; //!< If this block is allowed to be sent as an IPC buffer with flags=1
+                bool isMappedInKernel                 : 1; //!< If this block is mapped in kernel
+                bool processPermissionChangeAllowed   : 1; //!< If the application can use svcSetProcessMemoryPermission on this block
+                bool mapAllowed                       : 1; //!< If the application can use svcMapMemory on this block
+                bool unmapProcessCodeMemoryAllowed    : 1; //!< If the application can use svcUnmapProcessCodeMemory on this block
+                bool transferMemoryAllowed            : 1; //!< If the application can use svcCreateTransferMemory on this block
+                bool queryPhysicalAddressAllowed      : 1; //!< If the application can use svcQueryPhysicalAddress on this block
+                bool mapDeviceAllowed                 : 1; //!< If the application can use svcMapDeviceAddressSpace or svcMapDeviceAddressSpaceByForce on this block
+                bool mapDeviceAlignedAllowed          : 1; //!< If the application can use svcMapDeviceAddressSpaceAligned on this block
+                bool ipcBufferAllowed                 : 1; //!< If the application can use this block with svcSendSyncRequestWithUserBuffer
+                bool isReferenceCounted               : 1; //!< If the physical memory blocks backing this region are reference counted
+                bool mapProcessAllowed                : 1; //!< If the application can use svcMapProcessMemory on this block
+                bool attributeChangeAllowed           : 1; //!< If the application can use svcSetMemoryAttribute on this block
+                bool codeMemoryAllowed                : 1; //!< If the application can use svcCreateCodeMemory on this block
+                bool isLinearMapped                   : 1; //!< If this block is mapped linearly
             };
             u32 value;
         };

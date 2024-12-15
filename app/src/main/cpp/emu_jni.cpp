@@ -24,11 +24,11 @@ jint Fps; //!< An approximation of the amount of frames being submitted every se
 jfloat AverageFrametimeMs; //!< The average time it takes for a frame to be rendered and presented in milliseconds
 jfloat AverageFrametimeDeviationMs; //!< The average deviation of the average frametimes in milliseconds
 
-std::weak_ptr<skyline::kernel::OS> OsWeak;
-std::weak_ptr<skyline::gpu::GPU> GpuWeak;
+std::weak_ptr<skyline::kernel::OS>   OsWeak;
+std::weak_ptr<skyline::gpu::GPU>     GpuWeak;
 std::weak_ptr<skyline::audio::Audio> AudioWeak;
 std::weak_ptr<skyline::input::Input> InputWeak;
-std::weak_ptr<skyline::Settings> SettingsWeak;
+std::weak_ptr<skyline::Settings>     SettingsWeak;
 
 // https://cs.android.com/android/platform/superproject/+/master:bionic/libc/tzcode/bionic.cpp;l=43;drc=master;bpv=1;bpt=1
 static std::string GetTimeZoneName() {
