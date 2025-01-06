@@ -575,7 +575,7 @@ namespace {
                 : number(-1), hasDelta(false), partitionCount(0), endpointBits(0) {
             }
 
-            constexpr ModeDesc(int number, bool hasDelta, int partitionCount, int endpointBits, DeltaBits deltaBits)
+            constexpr ModeDesc(int number, bool hasDelta, int partitionCount, int endpointBits, const DeltaBits& deltaBits)
                 : number(number), hasDelta(hasDelta), partitionCount(partitionCount), endpointBits(endpointBits), deltaBits(deltaBits) {
             }
         };
@@ -591,7 +591,7 @@ namespace {
                 : type(End), channel(None), MSB(0), LSB(0), modeDesc() {
             }
 
-            constexpr BlockDesc(const DataType type, Channel channel, int MSB, int LSB, ModeDesc modeDesc)
+            constexpr BlockDesc(const DataType type, Channel channel, int MSB, int LSB, const ModeDesc& modeDesc)
                 : type(type), channel(channel), MSB(MSB), LSB(LSB), modeDesc(modeDesc) {
             }
 
