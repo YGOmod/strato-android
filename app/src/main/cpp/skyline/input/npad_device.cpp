@@ -219,7 +219,7 @@ namespace skyline::input {
         }
     }
 
-    void NpadDevice::WriteNextEntry(NpadControllerInfo &info, NpadControllerState entry) {
+    void NpadDevice::WriteNextEntry(NpadControllerInfo &info, const NpadControllerState &entry) {
         auto &lastEntry{info.state.at(info.header.currentEntry)};
 
         info.header.timestamp = util::GetTimeTicks();
@@ -239,7 +239,7 @@ namespace skyline::input {
         nextEntry.status.raw = connectionState.raw;
     }
 
-    void NpadDevice::WriteNextEntry(NpadSixAxisInfo &info, NpadSixAxisState entry) {
+    void NpadDevice::WriteNextEntry(NpadSixAxisInfo &info, const NpadSixAxisState &entry) {
         auto &lastEntry{info.state.at(info.header.currentEntry)};
 
         info.header.timestamp = util::GetTimeTicks();

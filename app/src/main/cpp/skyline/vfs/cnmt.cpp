@@ -28,13 +28,13 @@ namespace skyline::vfs {
     }
 
     std::string CNMT::GetTitleId() {
-        auto tilteId{header.id};
-        return fmt::format("{:016X}", tilteId);
+        auto titleId{header.id};
+        return fmt::format("{:016X}", titleId);
     }
 
     std::string CNMT::GetParentTitleId() {
-        auto parentTilteId{optionalHeader.titleId};
-        return fmt::format("{:016X}", parentTilteId);
+        auto parentTitleId{optionalHeader.titleId};
+        return fmt::format("{:016X}", parentTitleId);
     }
 
     ContentMetaType CNMT::GetContentMetaType() {
