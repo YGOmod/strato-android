@@ -37,6 +37,8 @@ namespace skyline::loader {
                     programNca = std::move(nca);
                 else if (nca.contentType == vfs::NcaContentType::Control && nca.romFs != nullptr)
                     controlNca = std::move(nca);
+                else if (nca.contentType == vfs::NcaContentType::Meta)
+                    metaNca = std::move(nca);
             } catch (const loader_exception &e) {
                 throw loader_exception(e.error);
             } catch (const std::exception &e) {
