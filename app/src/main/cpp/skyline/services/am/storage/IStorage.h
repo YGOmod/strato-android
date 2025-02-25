@@ -40,8 +40,14 @@ namespace skyline::service::am {
         void Push(const ValueType &value) {
             if (offset + sizeof(ValueType) > this->GetSpan().size())
                 throw exception("The supplied value cannot fit into the IStorage");
-
-            std::memcpy(this->GetSpan().data() + offset, reinterpret_cast<const u8 *>(&value), sizeof(ValueType));
+        
+            auto span = this->GetSpan();
+            const u8 *valuePtr = reinterpret_cast<const u8 *>(&value);
+        
+            for (size_t i = 0; i < sizeof(ValueType); ++i) {
+                span[offset + i] = valuePtr[i];
+            }
+        
             offset += sizeof(ValueType);
         }
 

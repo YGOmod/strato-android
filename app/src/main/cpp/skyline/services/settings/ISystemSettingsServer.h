@@ -16,16 +16,16 @@ namespace skyline::service::settings {
          * @url https://switchbrew.org/wiki/System_Version_Title
          */
         struct SysVerTitle {
-            u8 major; //!< The major version
-            u8 minor; //!< The minor vision
-            u8 micro; //!< The micro vision
+            u8 major;           //!< The major version
+            u8 minor;           //!< The minor vision
+            u8 micro;           //!< The micro vision
             u8 _pad0_;
-            u8 revMajor; //!< The major revision
-            u8 revMinor; //!< The major revision
+            u8 revMajor;        //!< The major revision
+            u8 revMinor;        //!< The major revision
             u16 _pad1_;
-            u8 platform[0x20]; //!< "NX"
-            u8 verHash[0x40]; //!< The hash of the version string
-            u8 dispVer[0x18]; //!< The version number string
+            u8 platform[0x20];  //!< "NX"
+            u8 verHash[0x40];   //!< The hash of the version string
+            u8 dispVer[0x18];   //!< The version number string
             u8 dispTitle[0x80]; //!< The version title string
         };
         static_assert(sizeof(SysVerTitle) == 0x100);

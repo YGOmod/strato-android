@@ -12,7 +12,7 @@ namespace skyline::service::nvdrv::device::nvhost {
           unknownEvent(std::make_shared<type::KEvent>(state, false)) {}
 
     PosixResult CtrlGpu::ZCullGetCtxSize(Out<u32> size) {
-        size = 0x1;
+        size = 0x10200;
         return PosixResult::Success;
     }
 
