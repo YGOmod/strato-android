@@ -961,7 +961,7 @@ namespace skyline::kernel::svc {
             TotalMemoryAvailableWithoutSystemResource = 21,
             TotalMemoryUsageWithoutSystemResource = 22,
             // 18.0.0+
-            //AliasRegionExtraSize = 28,
+            AliasRegionExtraSize = 28,
         };
 
         InfoState info{static_cast<u32>(ctx.w1)};
@@ -1057,9 +1057,9 @@ namespace skyline::kernel::svc {
                 out = state.process->memory.TranslateHostAddress(state.process->tlsExceptionContext);
                 break;
             
-            /*case InfoState::AliasRegionExtraSize:
+            case InfoState::AliasRegionExtraSize:
                 out = 0; // We stub it for now
-                break;*/
+                break;
 
             default:
                 LOGW("Unimplemented case ID0: {}, ID1: {}", static_cast<u32>(info), id1);
