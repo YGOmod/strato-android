@@ -25,6 +25,8 @@ namespace skyline::service::friends {
 
         Result GetBlockedUserListIds(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
 
+        Result GetProfileList(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
+
         Result DeclareOpenOnlinePlaySession(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
 
         Result DeclareCloseOnlinePlaySession(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
@@ -38,6 +40,7 @@ namespace skyline::service::friends {
             SFUNC(0x2775, IFriendService, GetFriendList),
             SFUNC(0x2788, IFriendService, CheckFriendListAvailability ),
             SFUNC(0x28A0, IFriendService, GetBlockedUserListIds),
+            SFUNC(0x2904, IFriendService, GetProfileList),
             SFUNC(0x2968, IFriendService, DeclareOpenOnlinePlaySession),
             SFUNC(0x2969, IFriendService, DeclareCloseOnlinePlaySession),
             SFUNC(0x2972, IFriendService, UpdateUserPresence),

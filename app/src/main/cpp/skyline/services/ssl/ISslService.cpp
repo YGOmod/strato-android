@@ -13,6 +13,8 @@ namespace skyline::service::ssl {
     }
 
     Result ISslService::SetInterfaceVersion(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response) {
+        i32 version{request.Pop<i32>()};
+        LOGD("SetInterfaceVersion set to: {}" , version);
         return {};
     }
 }

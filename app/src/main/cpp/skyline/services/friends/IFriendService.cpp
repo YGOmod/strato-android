@@ -33,6 +33,10 @@ namespace skyline::service::friends {
         return {};
     }
 
+    Result IFriendService::GetProfileList(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response) {
+        return {};
+    }
+
     Result IFriendService::DeclareOpenOnlinePlaySession(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response) {
         return {};
     }

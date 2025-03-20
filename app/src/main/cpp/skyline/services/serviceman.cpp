@@ -136,6 +136,7 @@ namespace skyline::service {
             SERVICE_CASE(socket::IResolver, "sfdnsres")
             SERVICE_CASE(spl::IRandomInterface, "csrng")
             SERVICE_CASE(ssl::ISslService, "ssl")
+            SERVICE_CASE(ssl::ISslService, "ssl:s")
             SERVICE_CASE(prepo::IPrepoService, "prepo:u")
             SERVICE_CASE(prepo::IPrepoService, "prepo:a")
             SERVICE_CASE(mmnv::IRequest, "mm:u")
