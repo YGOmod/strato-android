@@ -43,6 +43,7 @@
 #include "nfp/IUserManager.h"
 #include "nifm/IStaticService.h"
 #include "nim/IShopServiceAccessServerInterface.h"
+#include "nim/IShopServiceAccessSystemInterface.h"
 #include "socket/bsd/IClient.h"
 #include "socket/nsd/IManager.h"
 #include "socket/sfdnsres/IResolver.h"
