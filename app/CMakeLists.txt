@@ -390,6 +390,7 @@ add_library(skyline SHARED
         ${source_DIR}/skyline/services/socket/bsd/IClient.cpp
         ${source_DIR}/skyline/services/socket/nsd/IManager.cpp
         ${source_DIR}/skyline/services/socket/sfdnsres/IResolver.cpp
+        ${source_DIR}/skyline/services/spl/IGeneralInterface.cpp
         ${source_DIR}/skyline/services/spl/IRandomInterface.cpp
         ${source_DIR}/skyline/services/ssl/ISslService.cpp
         ${source_DIR}/skyline/services/ssl/ISslContext.cpp

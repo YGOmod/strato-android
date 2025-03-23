@@ -7,6 +7,7 @@
 #include "settings/ISettingsServer.h"
 #include "settings/ISystemSettingsServer.h"
 #include "apm/IManager.h"
+#include "apm/ISystemManager.h"
 #include "am/IApplicationProxyService.h"
 #include "am/IAllSystemAppletProxiesService.h"
 #include "audio/IAudioInManager.h"
@@ -45,6 +46,7 @@
 #include "socket/bsd/IClient.h"
 #include "socket/nsd/IManager.h"
 #include "socket/sfdnsres/IResolver.h"
+#include "spl/IGeneralInterface.h"
 #include "spl/IRandomInterface.h"
 #include "ssl/ISslService.h"
 #include "prepo/IPrepoService.h"
@@ -93,6 +95,7 @@ namespace skyline::service {
             SERVICE_CASE(settings::ISettingsServer, "set")
             SERVICE_CASE(settings::ISystemSettingsServer, "set:sys")
             SERVICE_CASE(apm::IManager, "apm")
+            SERVICE_CASE(apm::ISystemManager, "apm:sys")
             SERVICE_CASE(am::IApplicationProxyService, "appletOE")
             SERVICE_CASE(am::IAllSystemAppletProxiesService, "appletAE")
             SERVICE_CASE(audio::IAudioInManager, "audin:u")
@@ -134,6 +137,7 @@ namespace skyline::service {
             SERVICE_CASE(socket::IManager, "nsd:u")
             SERVICE_CASE(socket::IManager, "nsd:a")
             SERVICE_CASE(socket::IResolver, "sfdnsres")
+            SERVICE_CASE(spl::IGeneralInterface, "spl:")
             SERVICE_CASE(spl::IRandomInterface, "csrng")
             SERVICE_CASE(ssl::ISslService, "ssl")
             SERVICE_CASE(ssl::ISslService, "ssl:s")
@@ -148,6 +152,7 @@ namespace skyline::service {
             SERVICE_CASE(capsrv::IAlbumApplicationService, "caps:u")
             SERVICE_CASE(capsrv::IScreenShotApplicationService, "caps:su")
             SERVICE_CASE(nim::IShopServiceAccessServerInterface, "nim:eca")
+            SERVICE_CASE(nim::IShopServiceAccessSystemInterface, "nim:ecas")
             SERVICE_CASE(ro::IRoInterface, "ldr:ro")
             SERVICE_CASE(mii::IStaticService, "mii:e")
             SERVICE_CASE(mii::IStaticService, "mii:u")
