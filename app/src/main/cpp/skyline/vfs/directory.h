@@ -13,7 +13,7 @@ namespace skyline::vfs {
       public:
         enum class EntryType : u8 {
             Directory = 0x0,
-            File = 0x1,
+            File      = 0x1,
         };
 
         struct Entry {

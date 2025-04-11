@@ -932,34 +932,34 @@ namespace skyline::kernel::svc {
     void GetInfo(const DeviceState &state, SvcContext &ctx) {
         enum class InfoState : u32 {
             // 1.0.0+
-            AllowedCpuIdBitmask = 0,
-            AllowedThreadPriorityMask = 1,
-            AliasRegionBaseAddr = 2,
+            CoreMask = 0,
+            PriorityMask = 1,
+            AliasRegionAddress = 2,
             AliasRegionSize = 3,
-            HeapRegionBaseAddr = 4,
+            HeapRegionAddress = 4,
             HeapRegionSize = 5,
-            TotalMemoryAvailable = 6,
-            TotalMemoryUsage = 7,
-            IsCurrentProcessBeingDebugged = 8,
+            TotalMemorySize = 6,
+            UsedMemorySize = 7,
+            DebuggerAttached = 8,
             ResourceLimit = 9,
             IdleTickCount = 10,
             RandomEntropy = 11,
             // 2.0.0+
-            AslrRegionBaseAddr = 12,
+            AslrRegionAddress = 12,
             AslrRegionSize = 13,
-            StackRegionBaseAddr = 14,
+            StackRegionAddress = 14,
             StackRegionSize = 15,
             // 3.0.0+
-            TotalSystemResourceAvailable = 16,
-            TotalSystemResourceUsage = 17,
+            SystemResourceSizeTotal = 16,
+            SystemResourceSizeUsed = 17,
             ProgramId = 18,
             // 4.0.0+
-            PrivilegedProcessId = 19,
+            InitialProcessIdRange = 19,
             // 5.0.0+
-            UserExceptionContextAddr = 20,
+            UserExceptionContextAddress = 20,
             // 6.0.0+
-            TotalMemoryAvailableWithoutSystemResource = 21,
-            TotalMemoryUsageWithoutSystemResource = 22,
+            TotalNonSystemMemorySize = 21,
+            UsedNonSystemMemorySize = 22,
             // 18.0.0+
             AliasRegionExtraSize = 28,
         };
@@ -972,19 +972,19 @@ namespace skyline::kernel::svc {
 
         u64 out{};
         switch (info) {
-            case InfoState::IsCurrentProcessBeingDebugged:
-            case InfoState::PrivilegedProcessId:
+            case InfoState::DebuggerAttached:
+            case InfoState::InitialProcessIdRange:
                 break;
 
-            case InfoState::AllowedCpuIdBitmask:
+            case InfoState::CoreMask:
                 out = state.process->npdm.threadInfo.coreMask.to_ullong();
                 break;
 
-            case InfoState::AllowedThreadPriorityMask:
+            case InfoState::PriorityMask:
                 out = state.process->npdm.threadInfo.priority.Mask();
                 break;
 
-            case InfoState::AliasRegionBaseAddr:
+            case InfoState::AliasRegionAddress:
                 out = reinterpret_cast<u64>(state.process->memory.alias.guest.data());
                 break;
 
@@ -992,7 +992,7 @@ namespace skyline::kernel::svc {
                 out = state.process->memory.alias.size();
                 break;
 
-            case InfoState::HeapRegionBaseAddr:
+            case InfoState::HeapRegionAddress:
                 out = reinterpret_cast<u64>(state.process->memory.heap.guest.data());
                 break;
 
@@ -1000,11 +1000,11 @@ namespace skyline::kernel::svc {
                 out = state.process->memory.heap.size();
                 break;
 
-            case InfoState::TotalMemoryAvailable:
+            case InfoState::TotalMemorySize:
                 out = std::min(totalPhysicalMemory, state.process->memory.heap.size());
                 break;
 
-            case InfoState::TotalMemoryUsage:
+            case InfoState::UsedMemorySize:
                 out = state.process->memory.GetUserMemoryUsage() + state.process->memory.GetSystemResourceUsage();
                 break;
 
@@ -1016,7 +1016,7 @@ namespace skyline::kernel::svc {
                 out = util::GetTimeTicks();
                 break;
 
-            case InfoState::AslrRegionBaseAddr:
+            case InfoState::AslrRegionAddress:
                 out = reinterpret_cast<u64>(state.process->memory.base.data());
                 break;
 
@@ -1024,7 +1024,7 @@ namespace skyline::kernel::svc {
                 out = state.process->memory.base.size();
                 break;
 
-            case InfoState::StackRegionBaseAddr:
+            case InfoState::StackRegionAddress:
                 out = reinterpret_cast<u64>(state.process->memory.stack.guest.data());
                 break;
 
@@ -1032,11 +1032,11 @@ namespace skyline::kernel::svc {
                 out = state.process->memory.stack.size();
                 break;
 
-            case InfoState::TotalSystemResourceAvailable:
+            case InfoState::SystemResourceSizeTotal:
                 out = state.process->npdm.meta.systemResourceSize;
                 break;
 
-            case InfoState::TotalSystemResourceUsage:
+            case InfoState::SystemResourceSizeUsed:
                 // A very rough approximation of what this should be on the Switch, the amount of memory allocated for storing the memory blocks (https://switchbrew.org/wiki/Kernel_objects#KMemoryBlockManager)
                 out = state.process->memory.GetSystemResourceUsage();
                 break;
@@ -1045,15 +1045,15 @@ namespace skyline::kernel::svc {
                 out = state.process->npdm.aci0.programId;
                 break;
 
-            case InfoState::TotalMemoryAvailableWithoutSystemResource:
+            case InfoState::TotalNonSystemMemorySize:
                 out = std::min(totalPhysicalMemory, state.process->memory.heap.size()) - state.process->npdm.meta.systemResourceSize;
                 break;
 
-            case InfoState::TotalMemoryUsageWithoutSystemResource:
+            case InfoState::UsedNonSystemMemorySize:
                 out = state.process->memory.GetUserMemoryUsage();
                 break;
 
-            case InfoState::UserExceptionContextAddr:
+            case InfoState::UserExceptionContextAddress:
                 out = state.process->memory.TranslateHostAddress(state.process->tlsExceptionContext);
                 break;
             

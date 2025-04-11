@@ -13,7 +13,7 @@ namespace skyline::vfs {
             .flags = {
                 {
                     .is64Bit = true,
-                    .type = memory::AddressSpaceType::AddressSpace39Bit,
+                    .type = memory::AddressSpaceType::AddressSpace64Bit,
                     .optimizeMemoryAllocation = true,
                     .disableDeviceAddressSpaceMerge = false,
                 }

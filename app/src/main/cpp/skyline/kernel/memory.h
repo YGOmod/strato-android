@@ -200,21 +200,21 @@ namespace skyline {
 
         enum class AddressSpaceType : u8 {
             AddressSpace32Bit = 0, //!< 32-bit address space used by 32-bit applications
-            AddressSpace36Bit = 1, //!< 36-bit address space used by 64-bit applications before 2.0.0
+            AddressSpace64BitOld = 1, //!< 36-bit address space used by 64-bit applications before 2.0.0
             AddressSpace32BitNoReserved = 2, //!< 32-bit address space without the map region
-            AddressSpace39Bit = 3, //!< 39-bit address space used by 64-bit applications after 2.0.0
+            AddressSpace64Bit = 3, //!< 39-bit address space used by 64-bit applications after 2.0.0
         };
 
         inline std::string to_string(AddressSpaceType as) {
             switch (as) {
                 case AddressSpaceType::AddressSpace32Bit:
                     return "AddressSpace32Bit";
-                case AddressSpaceType::AddressSpace36Bit:
-                    return "AddressSpace36Bit";
+                case AddressSpaceType::AddressSpace64BitOld:
+                    return "AddressSpace64BitOld";
                 case AddressSpaceType::AddressSpace32BitNoReserved:
                     return "AddressSpace32BitNoReserved";
-                case AddressSpaceType::AddressSpace39Bit:
-                    return "AddressSpace39Bit";
+                case AddressSpaceType::AddressSpace64Bit:
+                    return "AddressSpace64Bit";
             }
         }
     }
@@ -267,7 +267,7 @@ namespace skyline {
           public:
             memory::AddressSpaceType addressSpaceType{};
             span<u8> addressSpace{}; //!< The entire address space
-            span<u8> codeBase36Bit{}; //!< A mapping in the lower 36 bits of the address space for mapping code and stack on 36-bit guests
+            span<u8> codeBase64BitOld{}; //!< A mapping in the lower 36 bits of the address space for mapping code and stack on 36-bit guests
             span<u8> base{}; //!< The application-accessible address space (for 39-bit guests) or the heap/alias address space (for 36-bit guests)
             MemoryRegion code{};
             MemoryRegion alias{};
@@ -395,8 +395,8 @@ namespace skyline {
              */
             constexpr bool AddressSpaceContains(span<u8> region) const {
                 region = GetHostSpan(region);
-                if (addressSpaceType == memory::AddressSpaceType::AddressSpace36Bit)
-                    return codeBase36Bit.contains(region) || base.contains(region);
+                if (addressSpaceType == memory::AddressSpaceType::AddressSpace64BitOld)
+                    return codeBase64BitOld.contains(region) || base.contains(region);
                 else
                     return base.contains(region);
             }

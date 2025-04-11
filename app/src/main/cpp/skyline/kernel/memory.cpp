@@ -13,8 +13,8 @@ namespace skyline::kernel {
     MemoryManager::~MemoryManager() noexcept {
         if (base.valid() && !base.empty())
             munmap(reinterpret_cast<void *>(base.data()), base.size());
-        if (codeBase36Bit.valid() && !codeBase36Bit.empty())
-            munmap(reinterpret_cast<void *>(codeBase36Bit.data()), codeBase36Bit.size());
+        if (codeBase64BitOld.valid() && !codeBase64BitOld.empty())
+            munmap(reinterpret_cast<void *>(codeBase64BitOld.data()), codeBase64BitOld.size());
     }
 
     void MemoryManager::MapInternal(const std::pair<u8 *, ChunkDescriptor> &newDesc) {
@@ -214,7 +214,7 @@ namespace skyline::kernel {
             constexpr size_t TotalSize{AliasRegionSize + HeapRegionSize};
         }
 
-        namespace AS39bit {
+        namespace AS64Bit {
             constexpr size_t MaxCodeRegionSize{4ULL * 1024 * 1024 * 1024}; //!< The assumed maximum size of the code region (4GiB)
             constexpr size_t AliasRegionSize{0x1000000000}; //!< The size of the alias region (64GiB)
             constexpr size_t HeapRegionSize{0x180000000}; //!< The size of the heap region (6GiB)
@@ -240,16 +240,16 @@ namespace skyline::kernel {
                 break;
             }
 
-            case memory::AddressSpaceType::AddressSpace36Bit: {
+            case memory::AddressSpaceType::AddressSpace64BitOld: {
                 addressSpace = span<u8>{reinterpret_cast<u8 *>(0), (1ULL << 36)};
                 baseSize = AS36bit::TotalSize;
                 maxAddress = addressSpace.size();
                 break;
             }
 
-            case memory::AddressSpaceType::AddressSpace39Bit: {
+            case memory::AddressSpaceType::AddressSpace64Bit: {
                 addressSpace = span<u8>{reinterpret_cast<u8 *>(0), 1ULL << 39};
-                baseSize = AS39bit::TotalSize;
+                baseSize = AS64Bit::TotalSize;
                 maxAddress = addressSpace.size();
                 break;
             }
@@ -271,8 +271,8 @@ namespace skyline::kernel {
                 break;
             }
 
-            case memory::AddressSpaceType::AddressSpace36Bit: {
-                code = codeBase36Bit = AllocateMappedRange(AS36bit::CodeRegionSize, RegionAlignment, AS36bit::CodeRegionStart, KgslReservedRegionSize, false);
+            case memory::AddressSpaceType::AddressSpace64BitOld: {
+                code = codeBase64BitOld = AllocateMappedRange(AS32bit::CodeRegionSize, RegionAlignment, AS36bit::CodeRegionStart, KgslReservedRegionSize, false);
 
                 if ((reinterpret_cast<u64>(base.data()) + baseSize) > (1ULL << 36)) {
                     LOGW("Couldn't fit regions into 36 bit AS! Resizing AS to 39 bits!");
@@ -322,17 +322,17 @@ namespace skyline::kernel {
                 break;
             }
 
-            case memory::AddressSpaceType::AddressSpace36Bit: {
+            case memory::AddressSpaceType::AddressSpace64BitOld: {
                 // As a workaround if we can't place the code region at the base of the AS we mark it as inaccessible heap so rtld doesn't crash
-                if (codeBase36Bit.data() != reinterpret_cast<u8 *>(AS36bit::CodeRegionStart)) {
+                if (codeBase64BitOld.data() != reinterpret_cast<u8 *>(AS36bit::CodeRegionStart)) {
                     MapInternal(std::pair<u8 *, ChunkDescriptor>(reinterpret_cast<u8 *>(AS36bit::CodeRegionStart), {
-                        .size = reinterpret_cast<size_t>(codeBase36Bit.data() - AS36bit::CodeRegionStart),
+                        .size = reinterpret_cast<size_t>(codeBase64BitOld.data() - AS36bit::CodeRegionStart),
                         .state = memory::states::Heap
                     }));
                 }
 
                 // Place code, stack and TLS/IO in the lower 36-bits of the host AS and heap and alias past that
-                code = span<u8>{codeBase36Bit.data(), codeBase36Bit.data() + AS36bit::CodeRegionSize};
+                code = span<u8>{codeBase64BitOld.data(), codeBase64BitOld.data() + AS36bit::CodeRegionSize};
                 stack = code; // stack is shared with code on 36-bit
                 tlsIo = stack; // TLS/IO is shared with stack on 36-bit
                 alias = span<u8>{base.data(), AS36bit::AliasRegionSize};
@@ -340,17 +340,17 @@ namespace skyline::kernel {
                 break;
             }
 
-            case memory::AddressSpaceType::AddressSpace39Bit: {
+            case memory::AddressSpaceType::AddressSpace64Bit: {
                 code = span<u8>{base.data(), util::AlignUp(codeRegion.size(), RegionAlignment)};
-                alias = span<u8>{code.host.end().base(), AS39bit::AliasRegionSize};
-                heap = span<u8>{alias.host.end().base(), AS39bit::HeapRegionSize};
-                stack = span<u8>{heap.host.end().base(), AS39bit::StackRegionSize};
-                tlsIo = span<u8>{stack.host.end().base(), AS39bit::TlsIoRegionSize};
+                alias = span<u8>{code.host.end().base(), AS64Bit::AliasRegionSize};
+                heap = span<u8>{alias.host.end().base(), AS64Bit::HeapRegionSize};
+                stack = span<u8>{heap.host.end().base(), AS64Bit::StackRegionSize};
+                tlsIo = span<u8>{stack.host.end().base(), AS64Bit::TlsIoRegionSize};
 
                 u64 newSize{code.size() + alias.size() + stack.size() + heap.size() + tlsIo.size()};
 
                 if (newSize > base.size()) [[unlikely]]
-                    throw exception("Guest VMM size has exceeded host carveout size: 0x{:X}/0x{:X} (Code: 0x{:X}/0x{:X})", newSize, base.size(), code.size(), AS39bit::MaxCodeRegionSize);
+                    throw exception("Guest VMM size has exceeded host carveout size: 0x{:X}/0x{:X} (Code: 0x{:X}/0x{:X})", newSize, base.size(), code.size(), AS64Bit::MaxCodeRegionSize);
 
                 if (newSize != base.size()) [[likely]]
                     munmap(base.end().base(), newSize - base.size());

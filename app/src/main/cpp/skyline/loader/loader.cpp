@@ -50,7 +50,7 @@ namespace skyline::loader {
 
         // Reserve patch + hook size only if we need to patch
         if (patch.size > 0) {
-            if (process->memory.addressSpaceType == memory::AddressSpaceType::AddressSpace36Bit) {
+            if (process->memory.addressSpaceType == memory::AddressSpaceType::AddressSpace64BitOld) {
                 process->memory.MapHeapMemory(span<u8>{guestBase, patch.size + hookSize}); // ---
                 process->memory.SetRegionPermission(span<u8>{guestBase, patch.size + hookSize}, memory::Permission{false, false, false});
             } else {
