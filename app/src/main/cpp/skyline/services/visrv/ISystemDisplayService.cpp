@@ -22,8 +22,8 @@ namespace skyline::service::visrv {
         struct DisplayMode{
             u32 width{};
             u32 height{};
-            f32 refresh_rate{};
-            u32 unknown{};
+            float refresh_rate{60.f};
+            u32 unknown{0};
         } displayMode;
 
         if (*state.settings->isDocked) {
@@ -33,8 +33,6 @@ namespace skyline::service::visrv {
             displayMode.width = 1280;
             displayMode.height = 720;
         }
-        displayMode.refresh_rate = 60.f;
-        displayMode.unknown = 0;
 
         return {};
     }
