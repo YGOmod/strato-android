@@ -26,7 +26,7 @@ namespace skyline::service::visrv {
       SERVICE_DECL(
           SFUNC(0x89D, ISystemDisplayService, SetLayerZ),
           SFUNC(0x89F, ISystemDisplayService, SetLayerVisibility),
-          SFUNC_BASE(0x908, ISystemDisplayService, IDisplayService, CreateStrayLayer)
+          SFUNC_BASE(0x908, ISystemDisplayService, IDisplayService, CreateStrayLayer),
           SFUNC(0xC80, ISystemDisplayService, GetDisplayMode)
       )
     };
