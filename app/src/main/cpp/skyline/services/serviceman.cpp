@@ -38,7 +38,7 @@
 #include "lbl/ILblController.h"
 #include "lm/ILogService.h"
 #include "ldn/IUserServiceCreator.h"
-#include "ldn/ISfServiceCreator.h"
+#include "ldn/lp2p/ISfServiceCreator.h"
 #include "account/IAccountServiceForApplication.h"
 #include "friends/IServiceCreator.h"
 #include "nfp/IUserManager.h"

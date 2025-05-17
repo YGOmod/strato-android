@@ -365,9 +365,9 @@ add_library(skyline SHARED
         ${source_DIR}/skyline/services/lbl/ILblController.cpp
         ${source_DIR}/skyline/services/lm/ILogService.cpp
         ${source_DIR}/skyline/services/lm/ILogger.cpp
-        ${source_DIR}/skyline/services/ldn/ISfServiceCreator.cpp
         ${source_DIR}/skyline/services/ldn/IUserServiceCreator.cpp
         ${source_DIR}/skyline/services/ldn/IUserLocalCommunicationService.cpp
+        ${source_DIR}/skyline/services/ldn/lp2p/ISfServiceCreator.cpp
         ${source_DIR}/skyline/services/account/IAccountServiceForApplication.cpp
         ${source_DIR}/skyline/services/account/IManagerForApplication.cpp
         ${source_DIR}/skyline/services/account/IProfile.cpp
