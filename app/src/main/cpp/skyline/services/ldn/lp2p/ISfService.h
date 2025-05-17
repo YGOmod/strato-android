@@ -12,7 +12,7 @@ namespace skyline::service::ldn {
      */
     class ISfService : public BaseService {
       public:
-        ISfService(const DeviceState &state, ServiceManager &manager) : BaseService(state, manager) {}
+        ISfService(const DeviceState &state, ServiceManager &manager);
 
         Result Initialize(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
 
