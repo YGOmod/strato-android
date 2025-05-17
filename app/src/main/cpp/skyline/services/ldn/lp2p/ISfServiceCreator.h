@@ -15,9 +15,11 @@ namespace skyline::service::ldn {
         ISfServiceCreator(const DeviceState &state, ServiceManager &manager);
 
         Result CreateNetworkService(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
+        Result CreateNetworkServiceMonitor(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
 
         SERVICE_DECL(
             SFUNC(0x0, ISfServiceCreator, CreateNetworkService),
+            SFUNC(0x8, ISfServiceCreator, CreateNetworkServiceMonitor),
         )
     };
 }
