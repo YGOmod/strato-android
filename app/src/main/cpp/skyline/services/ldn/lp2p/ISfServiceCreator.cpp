@@ -12,7 +12,7 @@ namespace skyline::service::ldn {
         u64 pid{request.Pop<u64>()};
         u64 reserved_input{request.Pop<u64>()};
         u32 input{request.Pop<u32>()};
-        LOGD("ISfServiceCreator called: pid={}, reserved_input={}, input={},
+        LOGD("ISfServiceCreator called: pid={}, reserved_input={}, input={}",
                 pid, reserved_input, input);
 
         if (input != 0x1) {
