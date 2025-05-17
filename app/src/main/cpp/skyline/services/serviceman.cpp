@@ -38,6 +38,7 @@
 #include "lbl/ILblController.h"
 #include "lm/ILogService.h"
 #include "ldn/IUserServiceCreator.h"
+#include "ldn/ISfServiceCreator.h"
 #include "account/IAccountServiceForApplication.h"
 #include "friends/IServiceCreator.h"
 #include "nfp/IUserManager.h"
@@ -129,6 +130,8 @@ namespace skyline::service {
             SERVICE_CASE(lbl::ILblController, "lbl")
             SERVICE_CASE(lm::ILogService, "lm")
             SERVICE_CASE(ldn::IUserServiceCreator, "ldn:u")
+            SERVICE_CASE(ldn::ISfServiceCreator, "lp2p:app")
+            SERVICE_CASE(ldn::ISfServiceCreator, "lp2p:sys")
             SERVICE_CASE(account::IAccountServiceForApplication, "acc:u0")
             SERVICE_CASE(friends::IServiceCreator, "friend:u")
             SERVICE_CASE(nfp::IUserManager, "nfp:user")
