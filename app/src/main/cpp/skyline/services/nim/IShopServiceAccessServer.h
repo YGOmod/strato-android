@@ -17,7 +17,7 @@ namespace skyline::service::nim {
         Result CreateAccessorInterface(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
 
         SERVICE_DECL(
-            SFUNC(0x0, IShopServiceAccessServer, CreateAccessorInterface),
+            SFUNC(0x0, IShopServiceAccessServer, CreateAccessorInterface)
         )
     };
 }

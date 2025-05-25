@@ -19,7 +19,7 @@ namespace skyline::service::ldn {
 
         SERVICE_DECL(
             SFUNC(0x0, ISfServiceCreator, CreateNetworkService),
-            SFUNC(0x8, ISfServiceCreator, CreateNetworkServiceMonitor),
+            SFUNC(0x8, ISfServiceCreator, CreateNetworkServiceMonitor)
         )
     };
 }

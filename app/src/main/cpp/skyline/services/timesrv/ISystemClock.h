@@ -41,7 +41,7 @@ namespace skyline::service::timesrv {
             SFUNC(0x1, ISystemClock, SetCurrentTime),
             SFUNC(0x2, ISystemClock, GetSystemClockContext),
             SFUNC(0x3, ISystemClock, SetSystemClockContext),
-            SFUNC(0x4, ISystemClock, GetOperationEventReadableHandle),
+            SFUNC(0x4, ISystemClock, GetOperationEventReadableHandle)
         )
     };
 }

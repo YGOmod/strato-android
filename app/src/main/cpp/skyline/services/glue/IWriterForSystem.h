@@ -17,7 +17,7 @@ namespace skyline::service::glue {
         Result CreateContextRegistrar(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
 
         SERVICE_DECL(
-            SFUNC(0x0, IWriterForSystem, CreateContextRegistrar),
+            SFUNC(0x0, IWriterForSystem, CreateContextRegistrar)
         )
     };
 }

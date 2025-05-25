@@ -17,7 +17,7 @@ namespace skyline::service::ldn {
         Result Initialize(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
 
         SERVICE_DECL(
-            SFUNC(0x0, ISfService, Initialize),
+            SFUNC(0x0, ISfService, Initialize)
         )
     };
 }

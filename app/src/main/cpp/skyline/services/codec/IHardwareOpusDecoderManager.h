@@ -62,7 +62,7 @@ namespace skyline::service::codec {
             SFUNC(0x1, IHardwareOpusDecoderManager, GetWorkBufferSize),
             SFUNC(0x4, IHardwareOpusDecoderManager, OpenHardwareOpusDecoderEx),
             SFUNC(0x5, IHardwareOpusDecoderManager, GetWorkBufferSizeEx),
-            SFUNC(0x8, IHardwareOpusDecoderManager, GetWorkBufferSizeExEx),
+            SFUNC(0x8, IHardwareOpusDecoderManager, GetWorkBufferSizeExEx)
         )
     };
 }

@@ -44,7 +44,7 @@ namespace skyline::service::timesrv {
             SFUNC(0x64, ISteadyClock, GetRtcValue),
             SFUNC(0x65, ISteadyClock, IsRtcResetDetected),
             SFUNC(0x66, ISteadyClock, GetSetupResultValue),
-            SFUNC(0xC8, ISteadyClock, GetInternalOffset),
+            SFUNC(0xC8, ISteadyClock, GetInternalOffset)
         )
     };
 }

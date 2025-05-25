@@ -13,5 +13,11 @@ namespace skyline::service::ldn {
     class ISfServiceMonitor : public BaseService {
       public:
         ISfServiceMonitor(const DeviceState &state, ServiceManager &manager) : BaseService(state, manager) {}
+
+        Result Initialize(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
+
+        SERVICE_DECL(
+            SFUNC(0x0, ISfServiceMonitor, Initialize)
+        )
     };
 }

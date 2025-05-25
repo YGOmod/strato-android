@@ -83,7 +83,7 @@ namespace skyline::service::codec {
             SFUNC(0x0, IHardwareOpusDecoder, DecodeInterleavedOld),
             SFUNC(0x4, IHardwareOpusDecoder, DecodeInterleavedWithPerfOld),
             SFUNC(0x6, IHardwareOpusDecoder, DecodeInterleaved), // DecodeInterleavedWithPerfAndResetOld is effectively the same as DecodeInterleaved
-            SFUNC(0x8, IHardwareOpusDecoder, DecodeInterleaved),
+            SFUNC(0x8, IHardwareOpusDecoder, DecodeInterleaved)
         )
     };
 

@@ -138,7 +138,7 @@ namespace skyline::service::timesrv {
             SFUNC(0x190, IStaticService, GetClockSnapshot),
             SFUNC(0x191, IStaticService, GetClockSnapshotFromSystemClockContext),
             SFUNC(0x1F4, IStaticService, CalculateStandardUserSystemClockDifferenceByUser),
-            SFUNC(0x1F5, IStaticService, CalculateSpanBetween),
+            SFUNC(0x1F5, IStaticService, CalculateSpanBetween)
         )
     };
 }

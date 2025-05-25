@@ -19,7 +19,7 @@ namespace skyline::service::bcat {
 
         SERVICE_DECL(
         SFUNC(0x0, IDeliveryCacheProgressService, GetEvent),
-        SFUNC(0x1, IDeliveryCacheProgressService, GetImpl),
+        SFUNC(0x1, IDeliveryCacheProgressService, GetImpl)
         )
     };
 }

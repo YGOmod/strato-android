@@ -16,7 +16,7 @@ namespace skyline::service::socket {
         Result ResolveEx(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
 
         SERVICE_DECL(
-            SFUNC(0x15, IManager, ResolveEx),
+            SFUNC(0x15, IManager, ResolveEx)
         )
     };
 }
