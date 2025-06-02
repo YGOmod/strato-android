@@ -281,9 +281,9 @@ class EmulationActivity : AppCompatActivity(), SurfaceHolder.Callback, View.OnTo
         val intentItem = intent.serializable(AppItemTag) as AppItem?
         if (intentItem != null) {
             item = intentItem
-            dlcUris = item.getEnabledDlcs().map { it.uri }.toCollection(ArrayList())
+            dlcUris = intentItem.getEnabledDlcs().map { it.uri }.toCollection(ArrayList())
 
-            updateUri = item.getEnabledUpdate()?.uri ?: Uri.EMPTY
+            updateUri = intentItem.getEnabledUpdate()?.uri ?: Uri.EMPTY
             return
         }
 
