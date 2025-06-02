@@ -292,7 +292,7 @@ namespace skyline {
             NcaLegacyKeyGenerationType legacyKeyGenerationType; //!< The keyblob to use for decryption
             NcaKeyAreaEncryptionKeyType keyAreaEncryptionKeyType; //!< The index of the key area encryption key that is needed
             u64 size; //!< The total size of the NCA
-            u64 programId;
+            u64 titleId;
             u32 contentIndex;
             u32 sdkVersion; //!< The version of the SDK the NCA was built with
             NcaKeyGenerationType keyGenerationType; //!< The keyblob to use for decryption
