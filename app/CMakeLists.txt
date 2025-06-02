@@ -249,10 +249,12 @@ add_library(skyline SHARED
         ${source_DIR}/skyline/vfs/os_backing.cpp
         ${source_DIR}/skyline/vfs/android_asset_filesystem.cpp
         ${source_DIR}/skyline/vfs/android_asset_backing.cpp
+        ${source_DIR}/skyline/vfs/bktr.cpp
         ${source_DIR}/skyline/vfs/cnmt.cpp
         ${source_DIR}/skyline/vfs/nacp.cpp
         ${source_DIR}/skyline/vfs/npdm.cpp
         ${source_DIR}/skyline/vfs/nca.cpp
+        ${source_DIR}/skyline/vfs/patch_manager.cpp
         ${source_DIR}/skyline/vfs/ticket.cpp
         ${source_DIR}/skyline/services/serviceman.cpp
         ${source_DIR}/skyline/services/base_service.cpp

@@ -2,6 +2,7 @@
 // Copyright © 2020 Skyline Team and Contributors (https://github.com/skyline-emu/)
 
 #include "skyline/crypto/key_store.h"
+#include "skyline/vfs/cnmt.h"
 #include "skyline/vfs/nca.h"
 #include "skyline/vfs/os_backing.h"
 #include "skyline/vfs/os_filesystem.h"
@@ -50,9 +51,12 @@ extern "C" JNIEXPORT jint JNICALL Java_org_stratoemu_strato_loader_RomFile_popul
     jclass clazz{env->GetObjectClass(thiz)};
     jfieldID applicationNameField{env->GetFieldID(clazz, "applicationName", "Ljava/lang/String;")};
     jfieldID applicationTitleIdField{env->GetFieldID(clazz, "applicationTitleId", "Ljava/lang/String;")};
+    jfieldID addOnContentBaseIdField{env->GetFieldID(clazz, "addOnContentBaseId", "Ljava/lang/String;")};
     jfieldID applicationAuthorField{env->GetFieldID(clazz, "applicationAuthor", "Ljava/lang/String;")};
     jfieldID rawIconField{env->GetFieldID(clazz, "rawIcon", "[B")};
     jfieldID applicationVersionField{env->GetFieldID(clazz, "applicationVersion", "Ljava/lang/String;")};
+    jfieldID romType{env->GetFieldID(clazz, "romTypeInt", "I")};
+    jfieldID parentTitleId{env->GetFieldID(clazz, "parentTitleId", "Ljava/lang/String;")};
 
     if (loader->nacp) {
         auto language{skyline::language::GetApplicationLanguage(static_cast<skyline::language::SystemLanguage>(systemLanguage))};
@@ -63,11 +67,20 @@ extern "C" JNIEXPORT jint JNICALL Java_org_stratoemu_strato_loader_RomFile_popul
         env->SetObjectField(thiz, applicationVersionField, env->NewStringUTF(loader->nacp->GetApplicationVersion().c_str()));
         env->SetObjectField(thiz, applicationTitleIdField, env->NewStringUTF(loader->nacp->GetSaveDataOwnerId().c_str()));
         env->SetObjectField(thiz, applicationAuthorField, env->NewStringUTF(loader->nacp->GetApplicationPublisher(language).c_str()));
+        env->SetObjectField(thiz, addOnContentBaseIdField, env->NewStringUTF(loader->nacp->GetAddOnContentBaseId().c_str()));
 
         auto icon{loader->GetIcon(language)};
         jbyteArray iconByteArray{env->NewByteArray(static_cast<jsize>(icon.size()))};
         env->SetByteArrayRegion(iconByteArray, 0, static_cast<jsize>(icon.size()), reinterpret_cast<const jbyte *>(icon.data()));
         env->SetObjectField(thiz, rawIconField, iconByteArray);
+    }
+
+    if (loader->cnmt) {
+        auto contentMetaType{loader->cnmt->GetContentMetaType()};
+        env->SetIntField(thiz, romType, static_cast<skyline::u8>(contentMetaType));
+
+        if (contentMetaType != skyline::vfs::ContentMetaType::Application)
+            env->SetObjectField(thiz, parentTitleId, env->NewStringUTF(loader->cnmt->GetParentTitleId().c_str()));
     }
 
     return static_cast<jint>(skyline::loader::LoaderResult::Success);
@@ -98,7 +111,7 @@ extern "C" JNIEXPORT jstring Java_org_stratoemu_strato_preference_FirmwareImport
         std::shared_ptr<skyline::vfs::Backing> backing{systemArchivesFileSystem->OpenFile(entry.name)};
         auto nca{skyline::vfs::NCA(backing, keyStore)};
 
-        if (nca.header.programId == systemVersionProgramId && nca.romFs != nullptr) {
+        if (nca.header.titleId == systemVersionProgramId && nca.romFs != nullptr) {
             auto controlRomFs{std::make_shared<skyline::vfs::RomFileSystem>(nca.romFs)};
             auto file{controlRomFs->OpenFile("file")};
             SystemVersion systemVersion;
@@ -165,7 +178,7 @@ extern "C" JNIEXPORT void Java_org_stratoemu_strato_preference_FirmwareImportPre
         std::shared_ptr<skyline::vfs::Backing> backing{systemArchivesFileSystem->OpenFile(entry.name)};
         auto nca{skyline::vfs::NCA(backing, keyStore)};
 
-        if (nca.header.programId >= firstFontProgramId && nca.header.programId <= lastFontProgramId && nca.romFs != nullptr) {
+        if (nca.header.titleId >= firstFontProgramId && nca.header.titleId <= lastFontProgramId && nca.romFs != nullptr) {
             auto controlRomFs{std::make_shared<skyline::vfs::RomFileSystem>(nca.romFs)};
 
             for (auto fileEntry = controlRomFs->fileMap.begin(); fileEntry != controlRomFs->fileMap.end(); fileEntry++) {

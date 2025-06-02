@@ -960,6 +960,8 @@ namespace skyline::kernel::svc {
             // 6.0.0+
             TotalNonSystemMemorySize = 21,
             UsedNonSystemMemorySize = 22,
+            // 11.0.0+
+            FreeThreadCount = 24,
             // 18.0.0+
             AliasRegionExtraSize = 28,
         };
@@ -1057,6 +1059,9 @@ namespace skyline::kernel::svc {
                 out = state.process->memory.TranslateHostAddress(state.process->tlsExceptionContext);
                 break;
             
+            case InfoState::FreeThreadCount:
+                out = 0; // We stub it for now
+                break;
             case InfoState::AliasRegionExtraSize:
                 out = 0; // We stub it for now
                 break;
