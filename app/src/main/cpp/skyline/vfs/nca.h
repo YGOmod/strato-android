@@ -363,7 +363,7 @@ namespace skyline {
             crypto::KeyStore::Key128 GetTitleKey();
             crypto::KeyStore::Key128 GetKeyAreaKey(NcaSectionEncryptionType type);
 
-            void ValidateNCA(const NCASectionHeader &sectionHeader);
+            void ValidateNca(const NcaSectionHeader &sectionHeader);
 
             static RelocationBucket ConvertRelocationBucketRaw(RelocationBucketRaw raw) {
                 return {raw.numberEntries, raw.endOffset, {raw.relocationEntries.begin(), raw.relocationEntries.begin() + raw.numberEntries}};
