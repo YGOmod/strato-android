@@ -183,7 +183,7 @@ namespace skyline::vfs {
 
     u8 NCA::GetKeyGeneration() {
         u8 legacyGen{static_cast<u8>(header.legacyKeyGenerationType)};
-        u8 gen{static_cast<u8>(Header.keyGenerationType)};
+        u8 gen{static_cast<u8>(header.keyGenerationType)};
         gen = std::max<u8>(legacyGen, gen);
         return gen > 0 ? gen - 1 : gen;
     }
@@ -228,7 +228,7 @@ namespace skyline::vfs {
 
             crypto::KeyStore::Key128 decryptedKeyArea;
             crypto::AesCipher cipher(*keyArea, MBEDTLS_CIPHER_AES_128_ECB);
-            cipher.Decrypt(decryptedKeyArea.data(), header.keyArea[keyAreaIndex].data(), decryptedKeyArea.size());
+            cipher.Decrypt(decryptedKeyArea.data(), header.encryptedKeyArea[keyAreaIndex].data(), decryptedKeyArea.size());
             return decryptedKeyArea;
         }};
 

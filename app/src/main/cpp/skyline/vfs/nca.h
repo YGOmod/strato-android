@@ -379,7 +379,7 @@ namespace skyline {
             std::shared_ptr<Backing> romFs; //!< The backing for this NCA's RomFS section
             NcaHeader header; //!< The header of the NCA
             NcaContentType contentType; //!< The content type of the NCA
-            u64 ivcfOffset{0};
+            u64 ivfcOffset{0};
 
             NCA(std::shared_ptr<vfs::Backing> backing, std::shared_ptr<crypto::KeyStore> keyStore, bool useKeyArea = false);
             NCA(std::optional<vfs::NCA> updateNca, std::shared_ptr<crypto::KeyStore> pKeyStore, std::shared_ptr<vfs::Backing> bktrBaseRomfs,
