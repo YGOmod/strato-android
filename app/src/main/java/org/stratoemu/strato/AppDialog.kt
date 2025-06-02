@@ -20,7 +20,7 @@ import androidx.appcompat.app.AlertDialog
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
-import org.stratoemu.strato.data.AppItem
+import org.stratoemu.strato.data.BaseAppItem
 import org.stratoemu.strato.data.AppItemTag
 import org.stratoemu.strato.databinding.AppDialogBinding
 import org.stratoemu.strato.loader.LoaderResult
