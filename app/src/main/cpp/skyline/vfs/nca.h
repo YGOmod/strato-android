@@ -242,7 +242,7 @@ namespace skyline {
             RomFSSuperblock romfs;
             BKTRSuperblock bktr;
         };
-        static_assert(sizeof(NcsSectionHeader) == 0x200);
+        static_assert(sizeof(NcaSectionHeader) == 0x200);
 
         struct RelocationBlock {
             u8 _pad0_[0x4];
