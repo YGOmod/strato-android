@@ -87,9 +87,10 @@ namespace skyline::vfs {
 
             if (section.raw.header.fsType == NcaSectionFsType::RomFs)
                 ReadRomFs(section, header.sectionTables[i]);
+            }
         }
 
-        void NCA::ReadPfs0(const NCASectionHeader &section, const NcaSectionTableEntry &entry) {
+    void NCA::ReadPfs0(const NcaSectionHeader &section, const NcaSectionTableEntry &entry) {
         size_t offset{static_cast<size_t>(entry.mediaOffset) * constant::MediaUnitSize + section.pfs0.pfs0HeaderOffset};
         size_t size{constant::MediaUnitSize * static_cast<size_t>(entry.mediaEndOffset - entry.mediaOffset)};
 
@@ -106,7 +107,7 @@ namespace skyline::vfs {
         }
     }
 
-    void NCA::ReadRomFs(const NCASectionHeader &sectionHeader, const NCASectionTableEntry &entry) {
+    void NCA::ReadRomFs(const NcaSectionHeader &sectionHeader, const NcaSectionTableEntry &entry) {
         const std::size_t baseOffset{entry.mediaOffset * constant::MediaUnitSize};
         ivfcOffset = sectionHeader.romfs.ivfc.levels[constant::IvfcMaxLevel - 1].offset;
         const std::size_t romFsOffset{baseOffset + ivfcOffset};
