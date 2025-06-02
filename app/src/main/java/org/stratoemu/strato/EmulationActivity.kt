@@ -95,7 +95,7 @@ class EmulationActivity : AppCompatActivity(), SurfaceHolder.Callback, View.OnTo
      */
     lateinit var item : BaseAppItem
 
-    lateinit var dlcUris : ArrayList<Uri>Add commentMore actions
+    lateinit var dlcUris : ArrayList<Uri>
 
     lateinit var updateUri : Uri
 
@@ -261,7 +261,7 @@ class EmulationActivity : AppCompatActivity(), SurfaceHolder.Callback, View.OnTo
 
         var updateFd : Int = -1
         if (updateUri != Uri.EMPTY) {
-            @SuppressLint("Recycle")Add commentMore actions
+            @SuppressLint("Recycle")
             updateFd = contentResolver.openFileDescriptor(updateUri, "r")!!.detachFd()
         }
 
@@ -281,7 +281,7 @@ class EmulationActivity : AppCompatActivity(), SurfaceHolder.Callback, View.OnTo
         val intentItem = intent.serializable(AppItemTag) as AppItem?
         if (intentItem != null) {
             item = intentItem
-            dlcUris = item.getEnabledDlcs().map { it.uri }.toCollection(ArrayList())Add commentMore actions
+            dlcUris = item.getEnabledDlcs().map { it.uri }.toCollection(ArrayList())
 
             updateUri = item.getEnabledUpdate()?.uri ?: Uri.EMPTY
             return

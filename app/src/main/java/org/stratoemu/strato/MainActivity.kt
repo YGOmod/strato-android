@@ -219,7 +219,7 @@ class MainActivity : AppCompatActivity() {
     private fun getAppItems() = mutableListOf<AppViewItem>().apply {
         appEntries?.let { entries ->
             sortGameList(entries.toList()).forEach { entry ->
-                val updates : List<BaseAppItem> = entries.filter { it.romType == RomType.Update && it.parentTitleId == entry.titleId }.map { BaseAppItem(it, true) }Add commentMore actions
+                val updates : List<BaseAppItem> = entries.filter { it.romType == RomType.Update && it.parentTitleId == entry.titleId }.map { BaseAppItem(it, true) }
                 val dlcs : List<BaseAppItem> = entries.filter { it.romType == RomType.DLC && it.parentTitleId == entry.titleId }.map { BaseAppItem(it, true) }
                 add(AppItem(entry, updates, dlcs).toViewItem())
             }
@@ -239,7 +239,7 @@ class MainActivity : AppCompatActivity() {
         return sortedApps
     }
 
-    private fun validateAppEntry(entry : AppEntry) : Boolean {Add commentMore actions
+    private fun validateAppEntry(entry : AppEntry) : Boolean {
         // Unknown ROMs are shown because NROs have this type
         return !appSettings.filterInvalidFiles || entry.loaderResult != LoaderResult.ParsingError && (entry.romType == RomType.Base || entry.romType == RomType.Unknown)
     }
