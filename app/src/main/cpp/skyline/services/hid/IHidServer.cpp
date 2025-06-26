@@ -68,6 +68,14 @@ namespace skyline::service::hid {
         return {};
     }
 
+    Result IHidServer::SetGestureOutputRanges(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response){
+        auto pid{request.Pop<u64>()};
+        auto unk{request.Pop<u16>()};
+
+        LOGD("pid: {}, unk: {}", pid, unk);
+        return{};
+    }
+
     Result IHidServer::SetSupportedNpadStyleSet(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response) {
         auto styleSet{request.Pop<NpadStyleSet>()};
         std::scoped_lock lock{state.input->npad.mutex};

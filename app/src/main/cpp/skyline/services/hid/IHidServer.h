@@ -80,6 +80,8 @@ namespace skyline::service::hid {
          */
         Result IsSixAxisSensorAtRest(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
 
+        Result SetGestureOutputRanges(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
+
         /**
          * @brief Sets the style of controllers supported
          * @url https://switchbrew.org/wiki/HID_services#SetSupportedNpadStyleSet
@@ -244,6 +246,7 @@ namespace skyline::service::hid {
             SFUNC(0x50, IHidServer, GetGyroscopeZeroDriftMode),
             SFUNC(0x51, IHidServer, ResetGyroscopeZeroDriftMode),
             SFUNC(0x52, IHidServer, IsSixAxisSensorAtRest),
+            SFUNC(0x5C, IHidServer, SetGestureOutputRanges),
             SFUNC(0x64, IHidServer, SetSupportedNpadStyleSet),
             SFUNC(0x65, IHidServer, GetSupportedNpadStyleSet),
             SFUNC(0x66, IHidServer, SetSupportedNpadIdType),
