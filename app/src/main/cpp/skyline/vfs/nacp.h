@@ -35,7 +35,7 @@ namespace skyline::vfs {
             u8  screenshotEnabled;
             u8  videoCaptureMode;
             u8  dataLossConfirmation;
-            u8  _pad0_[0x1];
+            u8  playLogPolicy;
             u64 presenceGroupId;
             std::array<u8, 0x20> ratingAge;
             std::array<char, 0x10> displayVersion; //!< The user-readable version of the application
@@ -47,17 +47,61 @@ namespace skyline::vfs {
             u64 deviceSaveDataJournalSize;
             u64 bcatDeliveryCacheStorageSize;
             char applicationErrorCodeCategory[8];
-            std::array<u64, 0x8> localCommunicationId;
+            std::array<u64, 8> localCommunicationId;
             u8  logoType;
             u8  logoHandling;
             u8  runtimeAddOnContentInstall;
             u8  runtimeParameterDelivery;
             u8  appropriateAgeForChina;
-            u8  _pad1_[0x1];
+            u8  _pad0_[1];
             u8  crashReport;
             u8  hdcp;
-            std::array<u8, 8> seedForPseudoDeviceId; //!< Seed that is combined with the device seed for generating the pseudo-device ID
-            u8  _pad2_[0xF00];
+            u64 seedForPseudoDeviceId; //!< Seed that is combined with the device seed for generating the pseudo-device ID
+            std::array<u8, 0x41> bcatPassphrase;
+            u8  startupUserAccountOption;
+            std::array<u8, 0x6> reservedForUserAccountSaveDataOperation;
+            u64 userAccountSaveDataSizeMax;
+            u64 userAccountSaveDataJournalSizeMax;
+            u64 deviceSaveDataSizeMax;
+            u64 deviceSaveDataJournalSizeMax;
+            u64 temporaryStorageSize;
+            u64 cacheStorageSize;
+            u64 cacheStorageJournalSize;
+            u64 cacheStorageDataAndJournalSize;
+            u16 cacheStorageIndexMax;
+            u8  _pad1_[1];
+            u8  runtimeUpgrade;
+            u32 supportingLimitedApplicationLicenses;
+            std::array<u64, 16> playLogQueryableApplicationId;
+            u8  playLogQueryCapability;
+            u8  repairFlag;
+            u8  programIndex;
+            u8  requiredNetworkServiceLicenseOnLaunchFlag;
+            u8  applicationErrorCodePrefix; // 20.0.0+
+            u8  _pad2_[1];
+            u8  acdIndex; // 20.0.0+
+            u8  apparentPlatform; // 20.0.0+
+            std::array<u8, 0x198> neighborDetectionClientConfiguration;
+            std::array<u8, 0x10> jitConfiguration;
+            std::array<u8, 0x40> requiredAddOnContentsSetBinaryDescriptor;
+            u8  playReportPermission;
+            u8  crashScreenshotForProd;
+            u8  crashScreenshotForDev;
+            u8  contentsAvailabilityTransitionPolicy;
+            u8  _pad3_[4];
+            std::array<u8, 0x40> accessibleLaunchRequiredVersion;
+            std::array<u8, 0x89> applicationControlDataCondition; // 20.0.0+
+            u8  initialProgramIndex;
+            u8  _pad4_[2];
+            u32 accessibleProgramIndexFlags; // 20.0.0+
+            u8  albumFileExport; // 20.0.0+
+            u8  _pad5_[7];
+            std::array<u8, 0x80> saveDataCertificateBytes; // 20.0.0+
+            u8  hasInGameVoiceChat; // 20.0.0+
+            u8  _pad6_[3];
+            u32 supportedExtraAddOnContentFlag; // 20.0.0+
+            u8  _pad7_[0x698];
+            std::array<u8, 0x400> platformSpecificRegion; // 20.0.0+
         } nacpContents{};
         static_assert(sizeof(NacpData) == 0x4000);
 
