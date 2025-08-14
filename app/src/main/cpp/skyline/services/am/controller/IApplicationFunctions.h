@@ -27,6 +27,7 @@ namespace skyline::service::am {
         std::shared_ptr<type::KEvent> gpuErrorEvent; //!< The event signalled on GPU errors
         std::shared_ptr<type::KEvent> friendInvitationStorageChannelEvent; //!< The event signalled on friend invitations
         std::shared_ptr<type::KEvent> notificationStorageChannelEvent;
+        std::shared_ptr<type::KEvent> unknownEvent;
         i32 previousProgramIndex{-1}; //!< There was no previous title
 
       public:
@@ -61,6 +62,9 @@ namespace skyline::service::am {
          */
         Result GetDisplayVersion(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
 
+        /**
+         * @url https://switchbrew.org/wiki/Applet_Manager_services#GetSaveDataSize
+         */
         Result GetSaveDataSize(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
 
         /**
@@ -142,6 +146,9 @@ namespace skyline::service::am {
          */
         Result GetFriendInvitationStorageChannelEvent(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
 
+        /**
+         * @url https://switchbrew.org/wiki/Applet_Manager_services#TryPopFromFriendInvitationStorageChannel
+         */
         Result TryPopFromFriendInvitationStorageChannel(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
 
         /**
@@ -149,6 +156,8 @@ namespace skyline::service::am {
          * @url https://switchbrew.org/wiki/Applet_Manager_services#GetNotificationStorageChannelEvent
          */
         Result GetNotificationStorageChannelEvent(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
+
+        Result GetUnknownEvent(type::KSession &session, ipc::IpcRequest &request, ipc::IpcResponse &response);
 
         SERVICE_DECL(
             SFUNC(0x1, IApplicationFunctions, PopLaunchParameter),
@@ -172,7 +181,8 @@ namespace skyline::service::am {
             SFUNC(0x82, IApplicationFunctions, GetGpuErrorDetectedSystemEvent),
             SFUNC(0x8C, IApplicationFunctions, GetFriendInvitationStorageChannelEvent),
             SFUNC(0x8D, IApplicationFunctions, TryPopFromFriendInvitationStorageChannel),
-            SFUNC(0x96, IApplicationFunctions, GetNotificationStorageChannelEvent)
+            SFUNC(0x96, IApplicationFunctions, GetNotificationStorageChannelEvent),
+            SFUNC(0xD2, IApplicationFunctions, GetUnknownEvent) // used for 20.0.0+ updates
         )
 
     };

@@ -87,9 +87,9 @@ namespace skyline::nce {
 
             union {
                 struct {
-                    u8 srcReg : 5; //!< 5-bit destination register
+                    u8  srcReg  : 5; //!< 5-bit destination register
                     u32 destReg : 15; //!< 15-bit source register
-                    u16 sig : 12; //!< 16-bit signature (0xD51)
+                    u16 sig     : 12; //!< 16-bit signature (0xD51)
                 };
                 u32 raw{};
             };
