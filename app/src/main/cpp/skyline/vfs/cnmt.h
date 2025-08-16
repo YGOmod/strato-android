@@ -4,7 +4,6 @@
 #pragma once
 
 #include "filesystem.h"
-#include "backing.h"
 
 namespace skyline::vfs {
 
