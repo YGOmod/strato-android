@@ -78,7 +78,7 @@ namespace skyline::vfs {
             u8  programIndex;
             u8  requiredNetworkServiceLicenseOnLaunchFlag;
             u8  applicationErrorCodePrefix; // 20.0.0+
-            u8  _pad2_[1];
+            u8  titlesDataFormat; // 21.0.0+
             u8  acdIndex; // 20.0.0+
             u8  apparentPlatform; // 20.0.0+
             std::array<u8, 0x198> neighborDetectionClientConfiguration;
@@ -88,19 +88,19 @@ namespace skyline::vfs {
             u8  crashScreenshotForProd;
             u8  crashScreenshotForDev;
             u8  contentsAvailabilityTransitionPolicy;
-            u8  _pad3_[4];
+            u8  _pad2_[4];
             std::array<u8, 0x40> accessibleLaunchRequiredVersion;
             std::array<u8, 0x89> applicationControlDataCondition; // 20.0.0+
             u8  initialProgramIndex;
-            u8  _pad4_[2];
+            u8  _pad3_[2];
             u32 accessibleProgramIndexFlags; // 20.0.0+
             u8  albumFileExport; // 20.0.0+
-            u8  _pad5_[7];
+            u8  _pad4_[7];
             std::array<u8, 0x80> saveDataCertificateBytes; // 20.0.0+
             u8  hasInGameVoiceChat; // 20.0.0+
-            u8  _pad6_[3];
+            u8  _pad5_[3];
             u32 supportedExtraAddOnContentFlag; // 20.0.0+
-            u8  _pad7_[0x698];
+            u8  _pad6_[0x698];
             std::array<u8, 0x400> platformSpecificRegion; // 20.0.0+
         } nacpContents{};
         static_assert(sizeof(NacpData) == 0x4000);
